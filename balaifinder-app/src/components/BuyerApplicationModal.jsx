@@ -51,6 +51,13 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const userString = localStorage.getItem("user");
+    if (!userString) {
+      console.error("User data not found in local storage");
+      return;
+    }
+    const { id: userId } = JSON.parse(userString);
+    formDataToSend.append('userId', userId);
       const formDataToSend = new FormData();
       formDataToSend.append('propertyId', propertyId);
       formDataToSend.append('firstName', formData.firstName);
