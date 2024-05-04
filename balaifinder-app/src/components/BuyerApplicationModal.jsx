@@ -91,7 +91,7 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
         <div className="outline outline-1 inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl shadow-black transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
           <form onSubmit={handleSubmit}>
-                <div>
+                <div className='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
                   <h1 className='font-bold text-center text-3xl m-4'>Want this Property?</h1>
                   <h2 className="text-sm text-center text-gray-500 mb-2">Complete this form to make an application for this property.</h2>
                   <div className="mb-4">
@@ -106,12 +106,12 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
                     <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email</label>
                     <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                   </div>
-                  <h2 className="text-sm text-center text-gray-500 mb-2">Upload your Company ID for verification.</h2>
                   <div className="mb-4">
+                    <label htmlFor="companyid" className="block text-gray-700 text-sm font-bold mb-2">Company ID</label>
                     <input type="file" id="companyid" name="companyid" onChange={handleFileChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                   </div>
-                  <h2 className="text-sm text-center text-gray-500 mb-2">Upload your Employee Certificate for verification.</h2>
                   <div className="mb-4">
+                    <label htmlFor="certificate" className="block text-gray-700 text-sm font-bold mb-2">Employment Certificate/Payslip</label>
                     <input type="file" id="certificate" name="certificate" onChange={handleFileChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                   </div>
                   <div className="flex justify-between">

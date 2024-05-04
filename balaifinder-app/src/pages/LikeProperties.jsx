@@ -51,13 +51,13 @@ const PropertyCheckoutPage = () => {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-sky-500">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Image</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Name</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Type</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Location</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Price</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Status</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Action</th>
+              <th className="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Property Image</th>
+              <th className="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Property Name</th>
+              <th className="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Type</th>
+              <th className="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">City Location</th>
+              <th className="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Price</th>
+              <th className="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Status</th>
+              <th className="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Action</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -81,8 +81,7 @@ const PropertyCheckoutPage = () => {
                     <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">AVAILABLE</span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">
-                    <button className="text-indigo-600 hover:text-indigo-900">View</button>
-                    <button onClick={() => openApplyModal(property.id)} className="text-green-600 hover:text-green-900 ml-2">Apply</button>
+                    <button onClick={() => openApplyModal(property.id)} className="text-white py-2 px-2 hover:bg-sky-700">Apply</button>
                   </td>
                 </tr>
               ))
