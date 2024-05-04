@@ -57,7 +57,6 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
       return;
     }
     const { id: userId } = JSON.parse(userString);
-    formDataToSend.append('userId', userId);
       const formDataToSend = new FormData();
       formDataToSend.append('propertyId', propertyId);
       formDataToSend.append('firstName', formData.firstName);
@@ -65,6 +64,7 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
       formDataToSend.append('email', formData.email);
       formDataToSend.append('companyid', formData.companyid);
       formDataToSend.append('certificate', formData.certificate);
+      formDataToSend.append('userId', userId);
 
       const response = await fetch(`${backendurl}/api/post/apply`, {
         method: 'POST',
