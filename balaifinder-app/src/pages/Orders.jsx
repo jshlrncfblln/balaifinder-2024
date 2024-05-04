@@ -37,12 +37,13 @@ const Orders = () => {
 
   const fetchStatus = async () => {
     try {
-      const userString = localStorage.getItem("user");
-      if (!userString) {
-        console.error("User data not found in local storage");
+      // Extract userId from the application state
+      const userId = application[0]?.userId; // Assuming userId is available in the first element
+      
+      if (!userId) {
+        console.error("User data not found in application state");
         return;
       }
-      const { userId } = JSON.parse(userString);
   
       const response = await fetch(`${backendurl}/api/get/${userId}/application/status`);
       if (!response.ok) {
