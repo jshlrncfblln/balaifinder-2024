@@ -121,7 +121,7 @@ function Footer() {
                             ></path>
                         </svg>
                     </a>
-                    <a href="https://balaifinder.vercel.app/realtor/manage-property" class="text-gray-400 hover:text-gray-500">
+                    <a href="https://matchwithbalaifinder.vercel.app/realtor/manage-property" class="text-gray-400 hover:text-gray-500">
                         <span class="sr-only">Dribbble</span>
                         <svg
                             class="w-6 h-6"
