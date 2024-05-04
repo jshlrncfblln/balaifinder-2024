@@ -3,10 +3,6 @@ import { backendurl } from '../../backend-connector';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-useEffect(() => {
-  ApplyModal();
-}, []);
-
 const ApplyModal = ({ isOpen, onClose, propertyId }) => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -15,6 +11,26 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
     companyid: null,
     certificate: null,
   });
+
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const userString = localStorage.getItem("user");
+        if (!userString) {
+          console.error("User data not found in local storage");
+          return;
+        }
+        const { id } = JSON.parse(userString);
+        setUserId(id);
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,13 +51,6 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userString = localStorage.getItem("user");
-    if (!userString) {
-      console.error("User data not found in local storage");
-      return;
-    }
-    const { id } = JSON.parse(userString);
-    
       const formDataToSend = new FormData();
       formDataToSend.append('propertyId', propertyId);
       formDataToSend.append('firstName', formData.firstName);
@@ -50,12 +59,11 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
       formDataToSend.append('companyid', formData.companyid);
       formDataToSend.append('certificate', formData.certificate);
 
-  
-      const response = await fetch(`${backendurl}/api/post/${id}/apply`, {
+      const response = await fetch(`${backendurl}/api/post/${userId}/apply`, {
         method: 'POST',
         body: formDataToSend,
       });
-  
+
       if (response.ok) {
         console.log('Application submitted successfully');
         onClose();
