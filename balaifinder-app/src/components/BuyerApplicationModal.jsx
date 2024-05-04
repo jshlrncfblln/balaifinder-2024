@@ -3,6 +3,10 @@ import { backendurl } from '../../backend-connector';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+useEffect(() => {
+  ApplyModal();
+}, []);
+
 const ApplyModal = ({ isOpen, onClose, propertyId }) => {
   const [formData, setFormData] = useState({
     firstName: '',
