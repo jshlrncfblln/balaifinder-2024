@@ -114,7 +114,7 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
                     <label htmlFor="certificate" className="block text-gray-700 text-sm font-bold mb-2">Employment Certificate/Payslip</label>
                     <input type="file" id="certificate" name="certificate" onChange={handleFileChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-end">
                     <button type="button" onClick={onClose} className="mt-3 w-1/2 inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                       Cancel
                     </button>

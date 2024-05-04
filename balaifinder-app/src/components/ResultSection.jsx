@@ -84,51 +84,53 @@ function ResultSection({ onClose }) {
             )}
           </div>
           {data.length > 0 && currentIndex < data.length ? (
-            <div className="w-full mx-auto flex items-center justify-center">
-              <h2 className="text-2xl font-bold text-center">You've Got a Match!</h2>
-              <div key={data[currentIndex].id} className="relative bg-white shadow-md shadow-black rounded-xl duration-500 hover:scale-105">
-                {/* Badge */}
-                <div className="absolute top-0 right-0 mt-2 mr-2">
-                  <span className={`inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 ${badgeText === 'High Match' ? 'bg-teal-400' : badgeText === 'Medium Match' ? 'bg-sky-500' : 'bg-red-500'}`}>
-                    {badgeText}
-                  </span>
-                </div>
-                <Link to={`/details/${data[currentIndex].id}`}>
-                  <img src={data[currentIndex].imgsrc ? data[currentIndex].imgsrc : 'https://img.freepik.com/free-photo/house-isolated-field_1303-23773.jpg?t=st=1710318322~exp=1710321922~hmac=1797b6b00add732c13f15b3160cb99f3c7e6fe2e9fb745a53d801c74a968fe8b&w=1380'} alt="Product" className="h-48 md:h-56 w-full object-cover rounded-t-xl" />
-                  <div className="px-4 py-3">
-                    <span className="text-gray-400 mr-3 uppercase text-xs">{data[currentIndex].type}</span>
-                    <p className="text-lg font-bold text-black truncate block capitalize">{data[currentIndex].name}</p>
-                    <p className="text-lg font-bold text-black truncate block capitalize">{data[currentIndex].location}</p>
-                    {/*<p className="text-lg font-bold text-black truncate block capitalize">Match Percentage {(data[currentIndex].score * 100).toFixed(0)}%</p>
-                    <p className="text-lg font-bold text-black truncate block capitalize">Match Percentage = {(
-                    data[currentIndex].score === 13 ? 100 :
-                    data[currentIndex].score === 12 ? 99 :
-                    data[currentIndex].score === 11 ? 98 :
-                    data[currentIndex].score === 10 ? 97 :
-                    data[currentIndex].score === 9 ? 96 :
-                    data[currentIndex].score === 8 ? 95 :
-                    data[currentIndex].score === 7 ? 94 :
-                    data[currentIndex].score === 6 ? 93 :
-                    data[currentIndex].score === 5 ? 92 :
-                    data[currentIndex].score === 4 ? 91 :
-                    data[currentIndex].score === 3 ? 90 :
-                    data[currentIndex].score === 2 ? 89 :
-                    data[currentIndex].score === 1 ? 88 :
-                    data[currentIndex].score === 0 ? 0 : 0)}%</p>
-                    */}
-                  <div className="flex items-center">
-                    <p className="text-lg font-semibold text-black cursor-auto my-3">₱{new Intl.NumberFormat().format(data[currentIndex].price)}</p>
-                    <div className="ml-auto">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-bag-plus" viewBox="0 0 16 16">
-                        <path fillRule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"/>
-                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
-                      </svg>
+            <div>
+              <h2 className="text-2xl font-bold text-center mb-4">You've Got a Match!</h2>
+              <div className="w-full mx-auto flex items-center justify-center">
+                <div key={data[currentIndex].id} className="relative bg-white shadow-md shadow-black rounded-xl duration-500 hover:scale-105">
+                  {/* Badge */}
+                  <div className="absolute top-0 right-0 mt-2 mr-2">
+                    <span className={`inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 ${badgeText === 'High Match' ? 'bg-teal-400' : badgeText === 'Medium Match' ? 'bg-sky-500' : 'bg-red-500'}`}>
+                      {badgeText}
+                    </span>
+                  </div>
+                  <Link to={`/details/${data[currentIndex].id}`}>
+                    <img src={data[currentIndex].imgsrc ? data[currentIndex].imgsrc : 'https://img.freepik.com/free-photo/house-isolated-field_1303-23773.jpg?t=st=1710318322~exp=1710321922~hmac=1797b6b00add732c13f15b3160cb99f3c7e6fe2e9fb745a53d801c74a968fe8b&w=1380'} alt="Product" className="h-48 md:h-56 w-full object-cover rounded-t-xl" />
+                    <div className="px-4 py-3">
+                      <span className="text-gray-400 mr-3 uppercase text-xs">{data[currentIndex].type}</span>
+                      <p className="text-lg font-bold text-black truncate block capitalize">{data[currentIndex].name}</p>
+                      <p className="text-lg font-bold text-black truncate block capitalize">{data[currentIndex].location}</p>
+                      {/*<p className="text-lg font-bold text-black truncate block capitalize">Match Percentage {(data[currentIndex].score * 100).toFixed(0)}%</p>
+                      <p className="text-lg font-bold text-black truncate block capitalize">Match Percentage = {(
+                      data[currentIndex].score === 13 ? 100 :
+                      data[currentIndex].score === 12 ? 99 :
+                      data[currentIndex].score === 11 ? 98 :
+                      data[currentIndex].score === 10 ? 97 :
+                      data[currentIndex].score === 9 ? 96 :
+                      data[currentIndex].score === 8 ? 95 :
+                      data[currentIndex].score === 7 ? 94 :
+                      data[currentIndex].score === 6 ? 93 :
+                      data[currentIndex].score === 5 ? 92 :
+                      data[currentIndex].score === 4 ? 91 :
+                      data[currentIndex].score === 3 ? 90 :
+                      data[currentIndex].score === 2 ? 89 :
+                      data[currentIndex].score === 1 ? 88 :
+                      data[currentIndex].score === 0 ? 0 : 0)}%</p>
+                      */}
+                    <div className="flex items-center">
+                      <p className="text-lg font-semibold text-black cursor-auto my-3">₱{new Intl.NumberFormat().format(data[currentIndex].price)}</p>
+                      <div className="ml-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-bag-plus" viewBox="0 0 16 16">
+                          <path fillRule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"/>
+                          <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                        </svg>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             </div>
-          </div>
+          </div> 
           ) : (
             <div className="p-6 pt-0 text-center">
               <svg

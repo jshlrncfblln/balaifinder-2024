@@ -81,7 +81,7 @@ const PropertyCheckoutPage = () => {
                     <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">AVAILABLE</span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">
-                    <button onClick={() => openApplyModal(property.id)} className="text-white py-2 px-2 hover:bg-sky-700">Apply</button>
+                    <button onClick={() => openApplyModal(property.id)} className="text-white py-2 px-2 bg-sky-500 rounded-lg hover:bg-sky-700">Apply</button>
                   </td>
                 </tr>
               ))
