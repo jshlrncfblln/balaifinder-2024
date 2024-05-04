@@ -49,6 +49,7 @@ const Orders = () => {
         throw new Error('Failed to fetch application status');
       }
       const data = await response.json();
+      console.log("Status data:", data);
       setStatus(data);
     } catch (error) {
       console.error('Error fetching application status:', error);
