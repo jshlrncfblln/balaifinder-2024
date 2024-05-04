@@ -10,6 +10,8 @@ const ApplicationList = () => {
     const [status, setStatus] = useState('');
     const [comments, setComments] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const [showImageModal, setShowImageModal] = useState(false);
+    
 
     useEffect(() => {
         // Fetch applications data when the component mounts
@@ -90,8 +92,8 @@ const ApplicationList = () => {
     };
 
     return (
-        <div className="">
-            <div className="mt-24 container grid grid-cols-4 gap-4 sm:grid-cols-1">
+        <div>
+            <div className="mt-24 grid grid-cols-4 gap-4 sm:grid-cols-1">
                 {applications.map(application => (
                     <div className="relative p-8 border border-gray-200 rounded-2xl shadow-sm flex flex-col" key={application.id}>
                         <div className="flex-1">
@@ -117,20 +119,6 @@ const ApplicationList = () => {
                                         strokeLinejoin="round" className="flex-shrink-0 w-6 h-6 text-emerald-500" aria-hidden="true">
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg><span className="ml-3 ">{application.email}</span></li>
-                                <li className="flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                                        strokeLinejoin="round" className="flex-shrink-0 w-6 h-6 text-emerald-500" aria-hidden="true">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                    <span className="ml-3 ">Certificate:</span>
-                                    <img className="h-20 w-20" src={application.certificate ? application.certificate : "https://www.asiaoceania.org/aogs2021/img/no_uploaded.png"} alt="UPLOADED ID" /></li>
-                                <li className="flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                                        strokeLinejoin="round" className="flex-shrink-0 w-6 h-6 text-emerald-500" aria-hidden="true">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                    <span className="ml-3 ">Company ID:</span>
-                                    <img className="h-20 w-20" src={application.companyid ? application.companyid : "https://www.asiaoceania.org/aogs2021/img/no_uploaded.png"} alt="UPLOADED ID" /></li>
                             </ul>
                         </div>
                         <button onClick={() => handleUpdateButtonClick(application)} className="bg-sky-500 text-white hover:bg-sky-700 mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium">UPDATE APPLICATION STATUS</button>
@@ -139,21 +127,44 @@ const ApplicationList = () => {
             </div>
             {showModal && selectedApplication && (
                 <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50">
-                    <div className="bg-white p-8 rounded-md">
+                    <div className="bg-white p-8 rounded-lg">
                         <h2 className="text-2xl font-semibold mb-4">Update Application Status</h2>
                         <form onSubmit={handleSubmit}>
                             <div className="mb-4">
                                 <label htmlFor="status" className="block text-gray-700 text-sm font-bold mb-2">APPLICATION STATUS</label>
-                                <input type="text" id="status" name="status" value={status} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                                <select id="status" name="status" value={status} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                    <option value="Approve">APPROVE</option>
+                                    <option value="Pending">PENDING</option>
+                                    <option value="Rejected">REJECTED</option>
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label htmlFor="comments" className="block text-gray-700 text-sm font-bold mb-2">REALTOR COMMENTS</label>
                                 <input type="text" id="comments" name="comments" value={comments} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                             </div>
-                            <button type="submit" className="bg-emerald-500 text-white  hover:bg-emerald-600 mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium">UPDATE APPLICATION</button>
-                            <button className="bg-emerald-500 text-white  hover:bg-emerald-600 mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium">MARK APPLICATION AS DONE</button>
-                            <button onClick={() => setShowModal(false)} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-md">Close</button>
+                            <div className="flex justify-center items-center">
+                                <button type="submit" className="bg-sky-500 text-white hover:bg-sky-700 mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium">UPDATE APPLICATION</button>
+                                <button onClick={() => setShowModal(false)} className="text-gray-800 hover:bg-sky-500 mt-8 block w-full py-3 px-6 border border=1 border-sky-500 rounded-md text-center font-medium">Close</button>
+                            </div>
                         </form>
+                    </div>
+                </div>
+            )}
+            {showImageModal && selectedApplication && (
+                <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50">
+                    <div className="bg-white p-8 rounded-lg">
+                        <h2 className="text-2xl font-semibold mb-4">Uploaded Images</h2>
+                        <div className="flex items-center">
+                            <div>
+                                <h3 className="text-lg font-semibold">Company ID</h3>
+                                <img className="mt-2 h-40 w-40" src={selectedApplication.companyid ? selectedApplication.companyid : "https://www.asiaoceania.org/aogs2021/img/no_uploaded.png"} alt="Company ID" />
+                            </div>
+                            <div className="ml-8">
+                                <h3 className="text-lg font-semibold">Certificate of Employment</h3>
+                                <img className="mt-2 h-40 w-40" src={selectedApplication.certificate ? selectedApplication.certificate : "https://www.asiaoceania.org/aogs2021/img/no_uploaded.png"} alt="Certificate of Employment" />
+                            </div>
+                        </div>
+                        <button onClick={() => setShowImageModal(false)} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 mt-4 rounded-md">Close</button>
                     </div>
                 </div>
             )}

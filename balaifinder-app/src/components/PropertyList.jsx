@@ -55,8 +55,9 @@ export default function PropLists({ page, limit, priceFilter, locationFilter, pr
 
     // Badge logic based on data
     const getBadgeText = (item) => {
-        const statuses = ['Active', 'Pending', 'New Added', 'Sold Out'];
-        return statuses[Math.floor(Math.random() * statuses.length)];
+        const statuses = ['Available', 'Pending', 'New Added', 'Sold Out'];
+        const randomIndex = Math.floor(Math.random() * statuses.length);
+        return statuses[randomIndex];
     };
   
 
@@ -67,7 +68,7 @@ export default function PropLists({ page, limit, priceFilter, locationFilter, pr
                     <div key={item.id} className="w-72 bg-white shadow-md shadow-black rounded-lg duration-500 hover:scale-105">
                         {/* Badge */}
                         <div className="absolute top-0 right-0 mt-2 mr-2">
-                            <span className={`inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 ${item.status === 'active' ? 'bg-green-500' : item.status === 'pending' ? 'bg-yellow-500' : item.status === 'new' ? 'bg-blue-500' : item.status === 'sold' ? 'bg-red-500' : ''}`}>
+                            <span className={`inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 ${item.status === 'Available' ? 'bg-green-500' : item.status === 'Pending' ? 'bg-yellow-500' : item.status === 'New Added' ? 'bg-blue-500' : item.status === 'Sold Out' ? 'bg-red-500' : ''}`}>
                                 {getBadgeText(item)}
                             </span>
                         </div>
