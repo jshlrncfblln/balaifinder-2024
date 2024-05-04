@@ -41,6 +41,20 @@ const Orders = () => {
       fetchUserData();
   }, []);
 
+    // Function to determine the background color of the status badge based on the status
+    const getStatusColor = (status) => {
+      switch (status) {
+        case 'APPROVED':
+          return 'bg-green-500';
+        case 'PENDING':
+          return 'bg-yellow-500';
+        case 'REJECTED':
+          return 'bg-red-500';
+        default:
+          return 'bg-gray-500'; // Default color for unknown status
+      }
+    };
+
     
   return (
     <div className="flex flex-col min-h-screen">
@@ -61,7 +75,8 @@ const Orders = () => {
                     className="h-40 w-full object-cover rounded-lg"
                   />
                   {status && (
-                    <span className="bg-green-500 text-white py-1 px-2 rounded-full text-xs absolute top-2 right-2">{status.status}</span>
+                    // Dynamically set the background color of the status badge based on the status
+                    <span className={`${getStatusColor(status.status)} text-white py-1 px-2 rounded-full text-xs absolute top-2 right-2`}>{status.status}</span>
                   )}
                   <div className="mt-2">
                     <h2 className="text-lg font-bold">{property.name}</h2>
