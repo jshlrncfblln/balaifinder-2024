@@ -44,7 +44,7 @@ const Orders = () => {
       }
       const { id } = JSON.parse(userString);
   
-      const response = await fetch(`${backendurl}/api/get/status/${id}`);
+      const response = await fetch(`${backendurl}/api/get/application/${id}/status`);
       if (!response.ok) {
         throw new Error('Failed to fetch application status');
       }
