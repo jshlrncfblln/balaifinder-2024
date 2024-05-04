@@ -1,69 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from '../components/navbar';
-import Footer from '../components/Footer';
-import ApplyModal from '../components/BuyerApplicationModal';
-import { backendurl } from "../../backend-connector";
-
 const Orders = () => {
-  const [application, setapplication] = useState([]);
+  const [application, setApplication] = useState([]);
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [selectedPropertyId, setSelectedPropertyId] = useState(null);
-  const [status, setStatus] = useState([]);
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
-      fetchApplications();
-      fetchStatus();
-  }, []);
-
-  const fetchApplications = async () => {
-      try {
-         const userString = localStorage.getItem("user");
+      const fetchUserData = async () => {
+        try {
+          const userString = localStorage.getItem("user");
           if (!userString) {
             console.error("User data not found in local storage");
             return;
           }
-          const { id } = JSON.parse(userString);
+          const { id: userId } = JSON.parse(userString);
           
-          const response = await fetch(`${backendurl}/api/get/${id}/user/application`);
-          if (!response.ok) {
+          const applicationResponse = await fetch(`${backendurl}/api/get/${userId}/user/application`);
+          if (!applicationResponse.ok) {
               throw new Error('Failed to fetch User application');
           }
-          const data = await response.json();
-          setapplication(data);
-      } catch (error) {
-          console.error('Error fetching application:', error);
-      }
-  };
+          const applicationData = await applicationResponse.json();
+          setApplication(applicationData);
 
-  const fetchStatus = async () => {
-    try {
-      const userString = localStorage.getItem("user");
-      if (!userString) {
-        console.error("User data not found in local storage");
-        return;
-      }
-      const { userId } = JSON.parse(userString);
-  
-      const response = await fetch(`${backendurl}/api/get/${userId}/application/status`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch application status');
-      }
-      const data = await response.json();
-      console.log("Status data:", data);
-      setStatus(data);
-    } catch (error) {
-      console.error('Error fetching application status:', error);
-    }
-  };
+          const statusResponse = await fetch(`${backendurl}/api/get/${userId}/application/status`);
+          if (!statusResponse.ok) {
+            throw new Error('Failed to fetch application status');
+          }
+          const statusData = await statusResponse.json();
+          console.log("Status data:", statusData);
+          setStatus(statusData);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+      };
+
+      fetchUserData();
+  }, []);
 
   const openApplyModal = (propertyId) => {
     setIsApplyModalOpen(true);
     setSelectedPropertyId(propertyId); // Set selected property_id
-};
-
+  };
 
   const closeApplyModal = () => {
-      setIsApplyModalOpen(false);
+    setIsApplyModalOpen(false);
   };
       
 
