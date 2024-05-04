@@ -27,7 +27,7 @@ const Orders = () => {
           const applicationData = await applicationResponse.json();
           setApplication(applicationData);
 
-          const statusResponse = await fetch(`${backendurl}/api/get/${userId}/application/status`);
+          const statusResponse = await fetch(`${backendurl}/api/get/${userId}/user/status`);
           if (!statusResponse.ok) {
             throw new Error('Failed to fetch application status');
           }
