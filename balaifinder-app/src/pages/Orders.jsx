@@ -87,7 +87,9 @@ const Orders = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-center">{property.location}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">₱ {new Intl.NumberFormat().format(property.price)}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">
-                    <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">{status}</span>
+                  {status && (
+                    <span className="bg-green-500 text-white py-1 px-2 rounded-full text-xs">{status.status}</span>
+                      )}
                   </td>
                 </tr>
               ))
