@@ -41,9 +41,9 @@ const Orders = () => {
         console.error("User data not found in local storage");
         return;
       }
-      const { id } = JSON.parse(userString);
+      const { userId } = JSON.parse(userString);
   
-      const response = await fetch(`${backendurl}/api/get/application/${id}/status`);
+      const response = await fetch(`${backendurl}/api/get/application/${userId}/status`);
       if (!response.ok) {
         throw new Error('Failed to fetch application status');
       }
