@@ -76,6 +76,7 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
       }
     } catch (error) {
       console.error('Error submitting application:', error);
+      console.error('Response data:', await response.text()); // Log the actual response data
     }
   };
   
