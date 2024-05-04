@@ -1,0 +1,65 @@
+.cube-loader {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(45deg); /* Adjust the rotation for the desired effect */
+    animation: animate 4s linear infinite;
+  }
+  
+  @keyframes animate {
+    0% {
+      transform: rotateX(-30deg) rotateY(0);
+    }
+  
+    100% {
+      transform: rotateX(-30deg) rotateY(360deg);
+    }
+  }
+  
+  .cube-loader .cube-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+  }
+  
+  .cube-loader .cube-wrapper .cube-span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotateY(calc(90deg * var(--i))) translateZ(75px);
+    background: linear-gradient(180deg, #e0f2fe, #7dd3fc, #0e7490); /* Gradient background with darker color at the bottom */
+  }
+  
+  
+  
+  .cube-loader .cube-wrapper .cube-span img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
+  .cube-loader .cube-top {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: rgb(231, 246, 247);
+    transform: rotateX(90deg) translateZ(75px);
+    transform-style: preserve-3d;
+  }
+  
+  .cube-loader .cube-top::before {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: hsla(0, 100%, 95%, 1);
+    transform: translateZ(-150px);
+    filter: blur(10px);
+    box-shadow: 0 0 10px #323232,
+                0 0 20px hsl(177, 51%, 58%) 19.6%,
+                0 0 30px #323232,
+                0 0 40px hsl(177, 73%, 78%) 19.6%;
+  }
