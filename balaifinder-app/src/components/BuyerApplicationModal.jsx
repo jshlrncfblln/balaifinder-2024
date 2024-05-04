@@ -31,6 +31,13 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const userString = localStorage.getItem("user");
+    if (!userString) {
+      console.error("User data not found in local storage");
+      return;
+    }
+    const { id } = JSON.parse(userString);
+    
       const formDataToSend = new FormData();
       formDataToSend.append('propertyId', propertyId);
       formDataToSend.append('firstName', formData.firstName);
@@ -40,7 +47,7 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
       formDataToSend.append('certificate', formData.certificate);
 
   
-      const response = await fetch(`${backendurl}/api/post/apply`, {
+      const response = await fetch(`${backendurl}/api/post/${id}/apply`, {
         method: 'POST',
         body: formDataToSend,
       });

@@ -128,6 +128,13 @@ function Navbar() {
                       >
                         Wishlists
                       </Link>
+                      <Link
+                      to="/orders"
+                      className="hover:text-white block px-4 py-2 text-sm text-gray-800 hover:bg-sky-500"
+                      role="menuitem"
+                    >
+                        Application
+                      </Link>
                       <a
                         onClick={handleLogout}
                         className="block px-4 py-2 text-sm text-gray-800 hover:bg-sky-500 cursor-pointer"
@@ -315,7 +322,7 @@ function Navbar() {
                       className="hover:text-white block px-4 py-2 text-sm text-gray-800 hover:bg-sky-500"
                       role="menuitem"
                     >
-                      Orders
+                      Application
                     </Link>
                     <a
                       onClick={handleLogout}

@@ -58,7 +58,6 @@ const Orders = () => {
               <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Location</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Price</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Status</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">ORDER PAGE</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -81,9 +80,6 @@ const Orders = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-center">₱ {new Intl.NumberFormat().format(property.price)}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">
                     <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">READY FOR SITE VISIT</span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-center">
-                    <button className="text-indigo-600 hover:text-indigo-900">View</button>
                   </td>
                 </tr>
               ))

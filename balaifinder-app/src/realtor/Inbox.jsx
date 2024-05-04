@@ -54,7 +54,7 @@ const MessageList = ({ messages, onSelectMessage }) => {
         <div className="">
             <div className="grid grid-cols-3 gap-4">
                 {messages.map((message) => (
-                    <div className="relative p-8 border border-gray-400 rounded-lg shadow-md flex flex-col" key={message.id}>
+                    <div className="relative p-8 border border-gray-800 rounded-lg shadow-md flex flex-col" key={message.id}>
                         <div className="flex-1">
                             <h3 className="text-base font-semibold">{message.comments}</h3>
                             <p className="absolute top-0 py-1.5 px-4 bg-sky-500 text-white rounded-full text-xs font-semibold uppercase tracking-wide  transform -translate-y-1/2">{message.status}</p>
