@@ -83,9 +83,9 @@ function ResultSection({ onClose }) {
               </button>
             )}
           </div>
-          <h2 className="text-2xl font-bold text-center">You've Got a Match!</h2>
           {data.length > 0 && currentIndex < data.length ? (
             <div className="w-full mx-auto flex items-center justify-center">
+              <h2 className="text-2xl font-bold text-center">You've Got a Match!</h2>
               <div key={data[currentIndex].id} className="relative bg-white shadow-md shadow-black rounded-xl duration-500 hover:scale-105">
                 {/* Badge */}
                 <div className="absolute top-0 right-0 mt-2 mr-2">
@@ -130,7 +130,33 @@ function ResultSection({ onClose }) {
             </div>
           </div>
           ) : (
-            <p className="text-center text-xl font-bold mt-8">No match found. Please try again.</p>
+            <div className="p-6 pt-0 text-center">
+              <svg
+                className="mx-auto h-20 w-20 text-red-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+              <h3 className="mb-6 mt-5 text-xl font-normal text-gray-500">
+                NO MATCH FOUND, TRY AGAIN.
+              </h3>
+              <div className="flex items-center justify-center gap-4">
+                <button
+                  onClick={onClose}
+                  className="w-full items-center rounded-full bg-black px-3 py-2 text-center text-base font-medium text-white hover:bg-gray-500 hover:text-white"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
           )}
 
           {/** SIMILAR PROPERTIES*/}
