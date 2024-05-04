@@ -46,7 +46,6 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
         return;
       }
       const { id } = JSON.parse(userString);
-      toast.success('Application Submitted Successfully.');
       const response = await fetch(`${backendurl}/api/post/apply/${id}`, {
         method: 'POST',
         headers: {
@@ -57,11 +56,23 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
-          fileUrl: fileUrl, // Use fileUrl state variable here
-          companyIdUrl: companyIdFileUrl, // Use companyIdFileUrl state variable here
+          fileUrl: fileUrl,
+          companyIdUrl: companyIdFileUrl,
         }),
       });
-      // Handle response...
+      
+      const responseData = await response.json();
+  
+      if (response.ok) {
+        // If the application was successfully submitted
+        toast.success('Application Submitted Successfully.');
+      } else if (response.status === 400 && responseData.message === 'You already applied') {
+        // If the user has already applied
+        toast.error('You already applied');
+      } else {
+        // For other errors
+        toast.error('Failed to Submit Application');
+      }
     } catch (error) {
       console.error('Error submitting application:', error);
       toast.error('Failed to Submit Application');
