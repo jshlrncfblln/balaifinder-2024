@@ -13,10 +13,10 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
   });
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+    const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: files ? files[0] :value,
+      [name] :value,
     }));
   };
 
