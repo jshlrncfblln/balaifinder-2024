@@ -38,26 +38,22 @@ const Orders = () => {
   const fetchStatus = async () => {
     try {
       const userString = localStorage.getItem("user");
-    if (!userString) {
-      console.error("User data not found in local storage");
-      return;
-    }
-    const { id } = JSON.parse(userString);
-        if (!userString) {
-          console.error("User data not found in local storage");
-          return;
-        }
-        
-        const response = await fetch(`${backendurl}/api/get/application/${id}/status`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch application status');
-        }
-        const data = await response.json();
-        setStatus(data);
+      if (!userString) {
+        console.error("User data not found in local storage");
+        return;
+      }
+      const { id } = JSON.parse(userString);
+  
+      const response = await fetch(`${backendurl}/api/get/status/${id}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch application status');
+      }
+      const data = await response.json();
+      setStatus(data);
     } catch (error) {
-        console.error('Error fetching application:', error);
+      console.error('Error fetching application status:', error);
     }
-};
+  };
 
   const openApplyModal = (propertyId) => {
     setIsApplyModalOpen(true);
