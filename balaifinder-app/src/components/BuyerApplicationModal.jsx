@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { backendurl } from '../../backend-connector';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ApplyModal = ({ isOpen, onClose, propertyId }) => {
@@ -101,6 +101,7 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
         }
       }
     } catch (error) {
+      toast.error("Oopps! Something went wrong on submitting application");
       console.error('Error submitting application:', error);
     }
   };
@@ -109,47 +110,50 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed z-50 inset-0 overflow-y-auto">
-      <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div className="fixed inset-0 transition-opacity" aria-hidden="true">
-          <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-        </div>
-        <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-        <div className="outline outline-1 inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl shadow-black transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          <form onSubmit={handleSubmit}>
-                <div className='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
-                  <h1 className='font-bold text-center text-3xl m-4'>Want this Property?</h1>
-                  <h2 className="text-sm text-center text-gray-500 mb-2">Complete this form to make an application for this property.</h2>
-                  <div className="mb-4">
-                    <label htmlFor="firstName" className="block text-gray-700 text-sm font-bold mb-2">First Name</label>
-                    <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                  </div>
-                  <div className="mb-4">
-                    <label htmlFor="lastName" className="block text-gray-700 text-sm font-bold mb-2">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                  </div>
-                  <div className="mb-4">
-                    <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                    <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                  </div>
-                  <div className="mb-4">
-                    <label htmlFor="companyid" className="block text-gray-700 text-sm font-bold mb-2">Company ID</label>
-                    <input type="file" id="companyid" name="companyid" onChange={handleFileChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                  </div>
-                  <div className="mb-4">
-                    <label htmlFor="certificate" className="block text-gray-700 text-sm font-bold mb-2">Employment Certificate/Payslip</label>
-                    <input type="file" id="certificate" name="certificate" onChange={handleFileChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                  </div>
-                  <div className="flex justify-end">
-                    <button type="button" onClick={onClose} className="mt-3 w-1/2 inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                      Cancel
-                    </button>
-                    <button type="submit" className="mt-3 w-1/2 inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-sky-500 text-base font-medium text-white hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                      Apply
-                    </button>
-                  </div>
-              </div>                
-          </form>
+    <div>
+      <ToastContainer />
+      <div className="fixed z-50 inset-0 overflow-y-auto">
+        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+            <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+          </div>
+          <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+          <div className="outline outline-1 inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl shadow-black transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <form onSubmit={handleSubmit}>
+                  <div className='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
+                    <h1 className='font-bold text-center text-3xl m-4'>Want this Property?</h1>
+                    <h2 className="text-sm text-center text-gray-500 mb-2">Complete this form to make an application for this property.</h2>
+                    <div className="mb-4">
+                      <label htmlFor="firstName" className="block text-gray-700 text-sm font-bold mb-2">First Name</label>
+                      <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    </div>
+                    <div className="mb-4">
+                      <label htmlFor="lastName" className="block text-gray-700 text-sm font-bold mb-2">Last Name</label>
+                      <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    </div>
+                    <div className="mb-4">
+                      <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                      <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    </div>
+                    <div className="mb-4">
+                      <label htmlFor="companyid" className="block text-gray-700 text-sm font-bold mb-2">Company ID</label>
+                      <input type="file" id="companyid" name="companyid" onChange={handleFileChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    </div>
+                    <div className="mb-4">
+                      <label htmlFor="certificate" className="block text-gray-700 text-sm font-bold mb-2">Employment Certificate/Payslip</label>
+                      <input type="file" id="certificate" name="certificate" onChange={handleFileChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    </div>
+                    <div className="flex justify-end">
+                      <button type="button" onClick={onClose} className="mt-3 w-1/2 inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Cancel
+                      </button>
+                      <button type="submit" className="mt-3 w-1/2 inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-sky-500 text-base font-medium text-white hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Apply
+                      </button>
+                    </div>
+                </div>                
+            </form>
+          </div>
         </div>
       </div>
     </div>
