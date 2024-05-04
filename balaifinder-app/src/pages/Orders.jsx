@@ -51,13 +51,13 @@ const Orders = () => {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-sky-500">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Image</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Assigned Realtor</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Name</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Type</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Location</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Price</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Status</th>
+              <th className="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Image</th>
+              <th className="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Assigned Realtor</th>
+              <th className="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Name</th>
+              <th className="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Type</th>
+              <th className="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Location</th>
+              <th className="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Price</th>
+              <th className="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Status</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -79,7 +79,7 @@ const Orders = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-center">{property.location}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">₱ {new Intl.NumberFormat().format(property.price)}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">
-                    <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">READY FOR SITE VISIT</span>
+                    <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">{property.status}</span>
                   </td>
                 </tr>
               ))
