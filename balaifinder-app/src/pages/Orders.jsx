@@ -8,6 +8,7 @@ const Orders = () => {
   const [application, setapplication] = useState([]);
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [selectedPropertyId, setSelectedPropertyId] = useState(null);
+  const [status, setStatus] = useState([]);
 
   useEffect(() => {
       fetchApplications();
@@ -90,7 +91,7 @@ const Orders = () => {
                 </td>
               </tr>
             ):(
-              application.map((property, status, index) => (
+              application.map((property, index) => (
                 <tr key={index}>
                   <td className="px-6 py-4 whitespace-nowrap text-center">
                     <img src={property.imgsrc ? property.imgsrc : 'https://img.freepik.com/free-photo/house-isolated-field_1303-23773.jpg?t=st=1710318322~exp=1710321922~hmac=1797b6b00add732c13f15b3160cb99f3c7e6fe2e9fb745a53d801c74a968fe8b&w=1380'} alt={property.name} className="h-16 w-16 object-cover" />
@@ -101,7 +102,7 @@ const Orders = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-center">{property.location}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">₱ {new Intl.NumberFormat().format(property.price)}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">
-                    <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">{status.status}</span>
+                    <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">{status}</span>
                   </td>
                 </tr>
               ))
