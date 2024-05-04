@@ -40,7 +40,7 @@ export default function PropLists({ page, limit, priceFilter, locationFilter, pr
     };
 
   // Badge logic based on data
-  const getBadgeText = (item) => {
+  /**const getBadgeText = (item) => {
     if (item.status === 'active') {
       return 'Active';
     } else if (item.status === 'pending') {
@@ -51,7 +51,14 @@ export default function PropLists({ page, limit, priceFilter, locationFilter, pr
       return 'Sold Out';
     }
     return '';
-  };
+  }; */
+
+    // Badge logic based on data
+    const getBadgeText = (item) => {
+        const statuses = ['Active', 'Pending', 'New Added', 'Sold Out'];
+        return statuses[Math.floor(Math.random() * statuses.length)];
+    };
+  
 
     return (
         <div className="w-fit mx-auto mt-10 mb-10">
