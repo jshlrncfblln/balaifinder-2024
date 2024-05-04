@@ -8,9 +8,11 @@ const Orders = () => {
   const [application, setapplication] = useState([]);
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [selectedPropertyId, setSelectedPropertyId] = useState(null);
+  const [status, setStatus] = useState ([]);
 
   useEffect(() => {
       fetchApplications();
+      fetchStatus();
   }, []);
 
   const fetchApplications = async () => {
@@ -32,6 +34,30 @@ const Orders = () => {
           console.error('Error fetching application:', error);
       }
   };
+
+  const fetchStatus = async () => {
+    try {
+      const userString = localStorage.getItem("user");
+    if (!userString) {
+      console.error("User data not found in local storage");
+      return;
+    }
+    const { id } = JSON.parse(userString);
+        if (!userString) {
+          console.error("User data not found in local storage");
+          return;
+        }
+        
+        const response = await fetch(`${backendurl}/api/get/application/${id}/status`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch application status');
+        }
+        const data = await response.json();
+        setStatus(data);
+    } catch (error) {
+        console.error('Error fetching application:', error);
+    }
+};
 
   const openApplyModal = (propertyId) => {
     setIsApplyModalOpen(true);
@@ -79,7 +105,7 @@ const Orders = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-center">{property.location}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">₱ {new Intl.NumberFormat().format(property.price)}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">
-                    <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">{property.status}</span>
+                    <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">{status.status}</span>
                   </td>
                 </tr>
               ))
