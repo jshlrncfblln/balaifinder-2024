@@ -8,8 +8,8 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
     firstName: '',
     lastName: '',
     email: '',
-    companyid: null,
-    certificate: null,
+    //companyid: null,
+    //certificate: null,
   });
 
   const handleChange = (e) => {
@@ -33,8 +33,8 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
-          companyid: formData.companyid,
-          certificate: formData.certificate,
+          //companyid: formData.companyid,
+          //certificate: formData.certificate,
         }),
       });
   
