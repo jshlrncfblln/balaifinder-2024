@@ -2,6 +2,7 @@ import Navbar from "../components/navbar";
 import Footer from "../components/Footer";
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Import Axios for making API requests
+import { backendurl } from "../../backend-connector";
 
 export default function Profile() {
     const [userData, setUserData] = useState({
@@ -26,7 +27,7 @@ export default function Profile() {
           }
           const { id } = JSON.parse(userString);
   
-          const response = await axios.get(`https://balaifinder-backend-deploy.onrender.com/api/users/${id}/profile`);
+          const response = await axios.get(`${backendurl}/api/users/${id}/profile`);
           setUserData(response.data);
         } catch (error) {
           console.error('Error fetching user profile:', error);
@@ -45,7 +46,7 @@ export default function Profile() {
         }
         const { id } = JSON.parse(userString);
   
-        await axios.put(`https://balaifinder-backend-deploy.onrender.com/api/users/${id}/updprofile`, userData);
+        await axios.put(`${backendurl}/api/users/${id}/updprofile`, userData);
         alert('Profile updated successfully!');
       } catch (error) {
         console.error('Error updating profile:', error);

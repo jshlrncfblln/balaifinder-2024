@@ -40,9 +40,14 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Now, proceed with form submission
+      const userString = localStorage.getItem("user");
+      if (!userString) {
+        console.error("User data not found in local storage");
+        return;
+      }
+      const { id } = JSON.parse(userString);
       toast.success('Application Submitted Successfully.');
-      const response = await fetch(`${backendurl}/api/post/apply`, {
+      const response = await fetch(`${backendurl}/api/post/apply/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
