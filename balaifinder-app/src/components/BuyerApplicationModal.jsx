@@ -109,11 +109,11 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
                   </div>
                   <h2 className="text-sm text-center text-gray-500 mb-2">Upload your Company ID for verification.</h2>
                   <div className="mb-4">
-                    <input type="file" id="companyid" name="companyid" value={formData.companyid} onChange={handleFileChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    <input type="file" id="companyid" name="companyid" onChange={handleFileChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                   </div>
                   <h2 className="text-sm text-center text-gray-500 mb-2">Upload your Employee Certificate for verification.</h2>
                   <div className="mb-4">
-                    <input type="file" id="certificate" name="certificate" value={formData.certificate} onChange={handleFileChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    <input type="file" id="certificate" name="certificate" onChange={handleFileChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                   </div>
                   <div className="flex justify-between">
                     <button type="button" onClick={onClose} className="mt-3 w-1/2 inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
