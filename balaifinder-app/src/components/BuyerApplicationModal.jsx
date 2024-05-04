@@ -12,7 +12,7 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
     certificate: null,
   });
 
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState();
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -59,7 +59,7 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
       formDataToSend.append('companyid', formData.companyid);
       formDataToSend.append('certificate', formData.certificate);
 
-      const response = await fetch(`${backendurl}/api/post/${userId}/apply`, {
+      const response = await fetch(`${backendurl}/api/post/apply`, {
         method: 'POST',
         body: formDataToSend,
       });
