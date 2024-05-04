@@ -38,7 +38,7 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
       formDataToSend.append('email', formData.email);
       formDataToSend.append('companyid', formData.companyid);
       formDataToSend.append('certificate', formData.certificate);
-
+  
       const response = await fetch(`${backendurl}/api/post/apply`, {
         method: 'POST',
         body: formDataToSend,
@@ -59,8 +59,9 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
         });
       } else {
         // Handle the case where the response is not successful
-        const responseData = await response.json();
-        if (responseData.message === 'You already applied') {
+        const responseData = await response.text();
+        console.error('Failed to submit application:', responseData);
+        if (responseData === 'You already applied') {
           toast.error('You already applied please wait for realtor to assess your application', {
             position: 'top-right',
             autoClose: 3000, // Close after 3 seconds
@@ -76,7 +77,6 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
       }
     } catch (error) {
       console.error('Error submitting application:', error);
-      console.error('Response data:', await response.text()); // Log the actual response data
     }
   };
   
