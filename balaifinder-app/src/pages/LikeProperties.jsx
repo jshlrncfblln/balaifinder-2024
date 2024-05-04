@@ -48,6 +48,7 @@ const PropertyCheckoutPage = () => {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <div className="flex-grow shadow-md overflow-hidden shadow-md outline outline-1 sm:rounded-lg mx-4 md:mx-10 mt-8 mb-24">
+        <h1 className='text-3xl font-bold text-gray-800 uppercase'>PROPERTIES ON YOUR WISHLIST</h1>
         {likes.length === 0 ? (
           <div className="px-6 py-4 whitespace-nowrap text-center">
             <p className="text-xl text-gray-400 mt-14">There's no house listed in your wishlist. Browse property and add it here.</p>
