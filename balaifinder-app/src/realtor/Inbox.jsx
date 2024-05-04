@@ -61,6 +61,7 @@ const MessageList = ({ messages, onSelectMessage }) => {
                             <p className="mt-4 flex items-baseline ">
                                 <span className="text-base font-bold tracking-tight">{message.name}</span><span className="ml-1 text-base font-semibold">{message.price}</span>
                             </p>
+                            <img src="" alt="" />
                             <p className="mt-6 ">{message.status}</p>
                             <ul role="list" className="mt-6 space-y-6">
                                 <li className="flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -83,11 +84,6 @@ const MessageList = ({ messages, onSelectMessage }) => {
                                         strokeLinejoin="round" className="flex-shrink-0 w-6 h-6 text-emerald-500" aria-hidden="true">
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg><img src={message.certificate} alt="" /></li>
-                                    <li className="flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                                        strokeLinejoin="round" className="flex-shrink-0 w-6 h-6 text-emerald-500" aria-hidden="true">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg><img src={message.companyid} alt="" /></li>
                             </ul>
                         </div>
                         <button onClick={() => handleUpdateButtonClick(message)} className="bg-sky-500 text-white hover:bg-sky-700 mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium">UPDATE APPLICATION STATUS</button>
