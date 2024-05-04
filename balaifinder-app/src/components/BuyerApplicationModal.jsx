@@ -38,6 +38,16 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
       formDataToSend.append('email', formData.email);
       formDataToSend.append('companyid', formData.companyid);
       formDataToSend.append('certificate', formData.certificate);
+
+      // Fetch the user ID from local storage
+    const userString = localStorage.getItem("user");
+    if (!userString) {
+      console.error("User data not found in local storage");
+      return;
+    }
+    const { id } = JSON.parse(userString);
+
+    formDataToSend.append('user_id', id); // Append the user ID to the form data
   
       const response = await fetch(`${backendurl}/api/post/apply`, {
         method: 'POST',
