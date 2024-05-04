@@ -8,7 +8,6 @@ const Orders = () => {
   const [application, setapplication] = useState([]);
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [selectedPropertyId, setSelectedPropertyId] = useState(null);
-  const [status, setStatus] = useState ([]);
 
   useEffect(() => {
       fetchApplications();
