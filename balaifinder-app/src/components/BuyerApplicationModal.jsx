@@ -44,13 +44,12 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
         body: formDataToSend,
       });
   
-      // Check if the response is successful
       if (response.ok) {
         console.log('Application submitted successfully');
         onClose();
         toast.success('Application has been sent!', {
           position: 'top-right',
-          autoClose: 3000, // Close after 3 seconds
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -58,13 +57,12 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
           progress: undefined,
         });
       } else {
-        // Handle the case where the response is not successful
         const responseData = await response.text();
         console.error('Failed to submit application:', responseData);
         if (responseData === 'You already applied') {
           toast.error('You already applied please wait for realtor to assess your application', {
             position: 'top-right',
-            autoClose: 3000, // Close after 3 seconds
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
