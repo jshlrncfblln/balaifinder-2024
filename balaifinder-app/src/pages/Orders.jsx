@@ -1,3 +1,9 @@
+import React, { useState, useEffect } from 'react';
+import Navbar from '../components/navbar';
+import Footer from '../components/Footer';
+import ApplyModal from '../components/BuyerApplicationModal';
+import { backendurl } from "../../backend-connector";
+
 const Orders = () => {
   const [application, setApplication] = useState([]);
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
