@@ -8,8 +8,8 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
     firstName: '',
     lastName: '',
     email: '',
-    //companyid: null,
-    //certificate: null,
+    companyid: null,
+    certificate: null,
   });
 
   const handleChange = (e) => {
@@ -20,22 +20,28 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
     }));
   };
 
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: files[0],
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('propertyId', propertyId);
+      formDataToSend.append('firstName', formData.firstName);
+      formDataToSend.append('lastName', formData.lastName);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('companyid', formData.companyid);
+      formDataToSend.append('certificate', formData.certificate);
+
       const response = await fetch(`${backendurl}/api/post/apply`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          propertyId: propertyId,
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          //companyid: formData.companyid,
-          //certificate: formData.certificate,
-        }),
+        body: formDataToSend,
       });
   
       // Check if the response is successful
@@ -102,11 +108,11 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
                   </div>
                   <h2 className="text-sm text-center text-gray-500 mb-2">Upload your Company ID for verification.</h2>
                   <div className="mb-4">
-                    <input type="file" id="companyid" name="companyid" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    <input type="file" id="companyid" name="companyid" value={formData.companyid} onChange={handleFileChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                   </div>
                   <h2 className="text-sm text-center text-gray-500 mb-2">Upload your Employee Certificate for verification.</h2>
                   <div className="mb-4">
-                    <input type="file" id="certificate" name="certificate" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    <input type="file" id="certificate" name="certificate" value={formData.certificate} onChange={handleFileChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                   </div>
                   <div className="flex justify-between">
                     <button type="button" onClick={onClose} className="mt-3 w-1/2 inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
