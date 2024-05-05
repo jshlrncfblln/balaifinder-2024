@@ -17,7 +17,7 @@ function Properties() {
     useEffect(() => {
         // Fetch price ranges from the database
         fetch(`${backendurl}/api/get/option/price`)
-            //.then(response => response.json())
+            .then(response => response.json())
             .then(data => setPriceRanges(data))
             .catch(error => console.error('Error fetching price ranges:', error));
 
@@ -89,10 +89,14 @@ function Properties() {
                             >
                                 <option value=""disabled selected hidden>Select Price Range</option>
                                 {/** get the prices that is in the database, make it ranges of price and show here*/}
-                                {priceRanges.map(range => (
+                                {/*{priceRanges.map(range => (
                                     <option key={range.id} value={range.value}>{range.label}</option>
-                                ))}
+                                ))}*/}
+                                {priceRanges.map(({value, label} , index) =>
+                                    <option value={value}>{label}</option>
+                                )}
                             </select>
+
                             <select
                                 className="w-1/3 p-3 rounded-md border border-1 border-sky-500 text-sm"
                                 value={locationFilter}
