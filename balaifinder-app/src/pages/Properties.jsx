@@ -93,7 +93,7 @@ function Properties() {
                                     <option key={range.id} value={range.value}>{range.label}</option>
                                 ))}*/}
                                 {priceRanges.map(({value, label} , index) =>
-                                    <option value={value.price}>sdsdsds{label.price}</option>
+                                    <option value={value[index].price}>sdsdsds{label[index].price}</option>
                                 )}
                             </select>
 
