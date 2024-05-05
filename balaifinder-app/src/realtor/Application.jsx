@@ -142,10 +142,8 @@ const ApplicationList = () => {
                                 <label htmlFor="comments" className="block text-gray-700 text-sm font-bold mb-2">REALTOR COMMENTS</label>
                                 <input type="text" id="comments" name="comments" value={comments} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                             </div>
-                            <div className="flex justify-center items-center">
-                                <button type="submit" className="bg-sky-500 text-white hover:bg-sky-700 mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium">UPDATE APPLICATION</button>
-                                <button onClick={() => setShowModal(false)} className="text-gray-800 hover:bg-sky-500 mt-8 block w-full py-3 px-6 border border=1 border-sky-500 rounded-md text-center font-medium">Close</button>
-                            </div>
+                            <button type="submit" className="bg-sky-500 text-white hover:bg-sky-700 mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium">UPDATE APPLICATION</button>
+                            <button onClick={() => setShowImageModal(true)} className="text-gray-800 hover:bg-sky-500 mt-8 block w-full py-3 px-6 border border=1 border-sky-500 rounded-md text-center font-medium">CHECK UPLOADED IMAGE</button>
                         </form>
                     </div>
                 </div>
