@@ -13,7 +13,7 @@ function Properties() {
     const [locations, setLocations] = useState([]);
     const [propertyTypes, setPropertyTypes] = useState([]);
     const limit = 20; // Limit to 20 results per page
-
+    console.log('x',priceRanges);
     useEffect(() => {
         // Fetch price ranges from the database
         fetch(`${backendurl}/api/get/option/price`)
