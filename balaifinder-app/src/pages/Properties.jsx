@@ -89,12 +89,10 @@ function Properties() {
                             >
                                 <option value="" selected>Select Price Range</option>
                                 {/** get the prices that is in the database, make it ranges of price and show here*/}
-                                {/*{priceRanges.map(range => (
+                                {priceRanges.map(range => (
                                     <option key={range.id} value={range.value}>{range.label}</option>
-                                ))}*/}
-                                {priceRanges.map(({value, label} , index) =>
-                                    <option value={value[index].price}>sdsdsds{label[index].price}</option>
-                                )}
+                                ))}
+                               
                             </select>
 
                             <select
