@@ -144,6 +144,7 @@ const ApplicationList = () => {
                                 <input type="text" id="comments" name="comments" value={comments} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                             </div>
                             <button type="submit" className="bg-sky-500 text-white hover:bg-sky-700 mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium">UPDATE APPLICATION</button>
+                            <button onClick={() => setShowImageModal(false)} className="text-gray-800 hover:bg-sky-500 mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium">CLOSE</button>
                         </form>
                     </div>
                 </div>
