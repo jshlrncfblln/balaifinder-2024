@@ -87,7 +87,7 @@ function Properties() {
                                 value={priceFilter}
                                 onChange={handlePriceFilterChange}
                             >
-                                <option value=""disabled selected hidden>Select Price Range</option>
+                                <option value="" selected>Select Price Range</option>
                                 {/** get the prices that is in the database, make it ranges of price and show here*/}
                                 {/*{priceRanges.map(range => (
                                     <option key={range.id} value={range.value}>{range.label}</option>
