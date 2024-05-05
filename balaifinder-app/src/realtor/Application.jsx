@@ -72,24 +72,31 @@ const ApplicationList = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Update status and comments for the selected application
-        axios.put(`${backendurl}/api/update/application/${selectedApplication.id}/status`, {
-            status: status,
-            comments: comments
-        })
-            .then(response => {
-                // Handle success
-                console.log('Status and comments updated successfully');
-                setShowModal(false);
-                toast.success('Status and comments updated successfully');
-                // Optionally, you can fetch applications data again to reflect the changes immediately
-                fetchApplications();
+        // Check if status or comments have changed
+        if (status !== selectedApplication.status || comments !== selectedApplication.comments) {
+            // Update status and comments for the selected application
+            axios.put(`${backendurl}/api/update/application/${selectedApplication.id}/status`, {
+                status: status,
+                comments: comments
             })
-            .catch(error => {
-                console.error('Error updating status and comments:', error);
-                toast.error('Error updating status and comments');
-            });
+                .then(response => {
+                    // Handle success
+                    console.log('Status and comments updated successfully');
+                    setShowModal(false);
+                    toast.success('Status and comments updated successfully');
+                    // Optionally, you can fetch applications data again to reflect the changes immediately
+                    fetchApplications();
+                })
+                .catch(error => {
+                    console.error('Error updating status and comments:', error);
+                    toast.error('Error updating status and comments');
+                });
+        } else {
+            // No changes, close the modal without updating
+            setShowModal(false);
+        }
     };
+    
 
     return (
         <div>

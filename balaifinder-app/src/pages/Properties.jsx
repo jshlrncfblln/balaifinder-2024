@@ -22,16 +22,16 @@ function Properties() {
             .catch(error => console.error('Error fetching price ranges:', error));
 
         // Fetch locations from the database
-        fetch(`${backendurl}/api/get/option/location`)
+        /**fetch(`${backendurl}/api/get/option/location`)
             .then(response => response.json())
             .then(data => setLocations(data))
-            .catch(error => console.error('Error fetching locations:', error));
+            .catch(error => console.error('Error fetching locations:', error));*/
 
         // Fetch property types from the database
-        fetch(`${backendurl}/api/get/option/type`)
+        /*fetch(`${backendurl}/api/get/option/type`)
             .then(response => response.json())
             .then(data => setPropertyTypes(data))
-            .catch(error => console.error('Error fetching property types:', error));
+            .catch(error => console.error('Error fetching property types:', error));*/
     }, []);
 
     const handlePriceFilterChange = (event) => {
