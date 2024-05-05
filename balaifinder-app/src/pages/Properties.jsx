@@ -17,8 +17,12 @@ function Properties() {
     useEffect(() => {
         // Fetch price ranges from the database
         fetch(`${backendurl}/api/get/option/price`)
-            .then(response => response.json())
-            .then(data => setPriceRanges(data))
+            .then(response => {
+                console.log('two piece chicken')
+                console.log(response.json());
+                response.json()}
+            )
+            //.then(data => setPriceRanges(data))
             .catch(error => console.error('Error fetching price ranges:', error));
 
         // Fetch locations from the database
