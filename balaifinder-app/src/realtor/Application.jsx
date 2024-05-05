@@ -122,6 +122,7 @@ const ApplicationList = () => {
                             </ul>
                         </div>
                         <button onClick={() => handleUpdateButtonClick(application)} className="bg-sky-500 text-white hover:bg-sky-700 mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium">UPDATE APPLICATION STATUS</button>
+                        <button onClick={() => setShowImageModal(true)} className="bg-sky-500 text-white hover:bg-sky-700 mt-2 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium">View Uploaded Images</button>
                     </div>
                 ))}
             </div>
@@ -143,7 +144,6 @@ const ApplicationList = () => {
                                 <input type="text" id="comments" name="comments" value={comments} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                             </div>
                             <button type="submit" className="bg-sky-500 text-white hover:bg-sky-700 mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium">UPDATE APPLICATION</button>
-                            <button onClick={() => setShowImageModal(true)} className="text-gray-800 hover:bg-sky-500 mt-8 block w-full py-3 px-6 border border=1 border-sky-500 rounded-md text-center font-medium">CHECK UPLOADED IMAGE</button>
                         </form>
                     </div>
                 </div>
@@ -151,7 +151,7 @@ const ApplicationList = () => {
             {showImageModal && selectedApplication && (
                 <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50">
                     <div className="bg-white p-8 rounded-lg">
-                        <h2 className="text-2xl font-semibold mb-4">Uploaded Images</h2>
+                        <h2 className="text-2xl font-semibold mb-4 text-center">Uploaded Images</h2>
                         <div className="flex items-center">
                             <div>
                                 <h3 className="text-lg font-semibold">Company ID</h3>
@@ -162,7 +162,7 @@ const ApplicationList = () => {
                                 <img className="mt-2 h-40 w-40" src={selectedApplication.certificate ? selectedApplication.certificate : "https://www.asiaoceania.org/aogs2021/img/no_uploaded.png"} alt="Certificate of Employment" />
                             </div>
                         </div>
-                        <button onClick={() => setShowImageModal(false)} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 mt-4 rounded-md">Close</button>
+                        <button onClick={() => setShowImageModal(false)} className="w-full border border-1 border-sky-500 hover:bg-sky-500 text-gray-800 font-semibold py-2 px-4 mt-4 rounded-md">CLOSE</button>
                     </div>
                 </div>
             )}
