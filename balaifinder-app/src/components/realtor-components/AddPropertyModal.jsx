@@ -39,7 +39,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
   };
 
   const validateForm = () => {
-    const requiredFields = ['name', 'location', 'type', 'price', 'monthly', 'nearelementary', 'nearhighschool', 'nearcollege', 'nearmall', 'nearchurch', 'numBedrooms', 'numBathrooms', 'typeoflot', 'familysize', 'businessready', 'description', 'imgsrc'];
+    const requiredFields = ['name', 'location', 'type', 'price', 'monthly', 'nearelementary', 'nearhighschool', 'nearcollege', 'nearmall', 'nearchurch', 'numBedrooms', 'numBathrooms', 'typeoflot', 'familysize', 'businessready', 'description'];
     const isValid = requiredFields.every(field => property[field].trim() !== '');
     setFormValid(isValid);
   };
