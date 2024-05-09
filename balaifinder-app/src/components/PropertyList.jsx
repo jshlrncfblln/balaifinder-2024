@@ -80,10 +80,10 @@ export default function PropLists({ page, limit, priceFilter, locationFilter, pr
                         currentData.map((item, index) => {
                             const getBadgeInfo = () => {
                                 const statuses = {
-                                    'Available': 'bg-green-500',
-                                    'Pending': 'bg-yellow-500',
-                                    'New Added': 'bg-blue-500',
-                                    'Sold Out': 'bg-red-500'
+                                    'Available': 'bg-green-500 text-white',
+                                    'Pending': 'bg-yellow-500 text-white',
+                                    'New Added': 'bg-blue-500 text-white',
+                                    'Sold Out': 'bg-red-500 text-white'
                                 };
                                 const randomIndex = Math.floor(Math.random() * Object.keys(statuses).length);
                                 const status = Object.keys(statuses)[randomIndex];
