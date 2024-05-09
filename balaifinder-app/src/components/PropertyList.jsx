@@ -62,27 +62,30 @@ export default function PropLists({ page, limit, priceFilter, locationFilter, pr
         const randomIndex = Math.floor(Math.random() * statuses.length);
         return statuses[randomIndex];
     };
-  
 
+    const SkeletonCard = () => {
+        <div
+        class="flex flex-col bg-neutral-300 w-56 h-64 animate-pulse rounded-xl p-4 gap-4"
+      >
+        <div class="bg-neutral-400/50 w-full h-32 animate-pulse rounded-md"></div>
+        <div class="flex flex-col gap-2">
+          <div class="bg-neutral-400/50 w-full h-4 animate-pulse rounded-md"></div>
+          <div class="bg-neutral-400/50 w-4/5 h-4 animate-pulse rounded-md"></div>
+          <div class="bg-neutral-400/50 w-full h-4 animate-pulse rounded-md"></div>
+          <div class="bg-neutral-400/50 w-2/4 h-4 animate-pulse rounded-md"></div>
+        </div>
+      </div>  
+    }
     return (
         <div className="w-fit mx-auto mt-10 mb-10">
             <div className="grid grid-cols lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-6 gap-x-4">
                 {skeleton ? (
-                    <div
-                    class="flex flex-col bg-neutral-300 w-56 h-64 animate-pulse rounded-xl p-4 gap-4"
-                  >
-                    <div class="bg-neutral-400/50 w-full h-32 animate-pulse rounded-md"></div>
-                    <div class="flex flex-col gap-2">
-                      <div class="bg-neutral-400/50 w-full h-4 animate-pulse rounded-md"></div>
-                      <div class="bg-neutral-400/50 w-4/5 h-4 animate-pulse rounded-md"></div>
-                      <div class="bg-neutral-400/50 w-full h-4 animate-pulse rounded-md"></div>
-                      <div class="bg-neutral-400/50 w-2/4 h-4 animate-pulse rounded-md"></div>
-                    </div>
-                  </div>                  
+                    Array.from({ length: 3 }, (_, index) => (
+                        <SkeletonCard key={index} />
+                    ))               
                 ):(
-                    <div>
-                        {currentData.map((item, index) => (
-                            <div key={item.id} className="w-72 bg-white shadow-md shadow-black rounded-lg duration-500 hover:scale-105">
+                    currentData.map((item, index) => (
+                        <div key={item.id} className="w-72 bg-white shadow-md shadow-black rounded-lg duration-500 hover:scale-105">
                                 {/* Badge */}
                                 <div className="absolute top-0 right-0 mt-2 mr-2">
                                     <span className={`inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 ${item.status === 'Available' ? 'bg-green-500' : item.status === 'Pending' ? 'bg-yellow-500' : item.status === 'New Added' ? 'bg-blue-500' : item.status === 'Sold Out' ? 'bg-red-500' : ''}`}>
@@ -107,9 +110,8 @@ export default function PropLists({ page, limit, priceFilter, locationFilter, pr
                                         </div>
                                     </div>
                                 </Link>
-                            </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))
                 )}
             </div>
             <div className="mb-4 flex justify-center space-x-4" aria-label="Pagination" style={{ marginTop: "20px" }}>
