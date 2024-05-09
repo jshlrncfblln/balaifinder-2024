@@ -52,6 +52,7 @@ const PropertyDetails = () => {
       const userString = localStorage.getItem("user");
       if (!userString) {
         console.error("User data not found in local storage");
+        toast.warning("You must login first to add products to your wishlist");
         return;
       }
       const { id } = JSON.parse(userString);
