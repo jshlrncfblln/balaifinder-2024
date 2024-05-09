@@ -67,7 +67,7 @@ export default function PropLists({ page, limit, priceFilter, locationFilter, pr
     return (
         <div className="w-fit mx-auto mt-10 mb-10">
             <div className="grid grid-cols lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-6 gap-x-4">
-                {loading ? (
+                {skeleton ? (
                     <div
                     class="flex flex-col bg-neutral-300 w-56 h-64 animate-pulse rounded-xl p-4 gap-4"
                   >
