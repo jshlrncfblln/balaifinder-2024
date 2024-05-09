@@ -3,7 +3,7 @@
     import { backendurl } from "../../backend-connector";
     import {Link} from "react-router-dom"
 
-    export default function PropLists({ page, limit, setPage }) {
+    export default function PropLists({ }) {
         const [data, setData] = useState([]);
         const [totalPages, setTotalPages] = useState(1);
         const [loading, setLoading] = useState(true);
@@ -25,7 +25,7 @@
         useEffect(() => {
             console.log('Effect triggered, loading data...');
             loadData();
-        }, [page, limit]);
+        }, []);
 
         const startIndex = (page - 1) * limit;
         const endIndex = startIndex + limit;
