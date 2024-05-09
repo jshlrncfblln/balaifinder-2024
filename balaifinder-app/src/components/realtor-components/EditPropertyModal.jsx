@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Navigate } from 'react-router-dom';
-import 'react-toastify/dist/ReactToastify.css';
 import { backendurl } from '../../../backend-connector';
-import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-
+import 'react-toastify/dist/ReactToastify.css';
+import { ref, uploadBytes, getDownloadURL } from "@firebase/storage";
+import { imageDb } from '../../../firebase';
 
 const EditPropertyModal = ({ isOpen, onClose, onEditProperty, propertyToEdit }) => {
   const [property, setProperty] = useState(propertyToEdit);
-
+  const [propertyImage, setPropertyImage] = useState(null); // State to hold property image file
+  const [fileUrl, setFileUrl] = useState(""); // State to hold the file URL
+  
   useEffect(() => {
     setProperty({...propertyToEdit});
   }, [propertyToEdit]);
@@ -17,28 +18,24 @@ const EditPropertyModal = ({ isOpen, onClose, onEditProperty, propertyToEdit }) 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (files) {
+      setPropertyImage(files[0]);
+    } else {
       setProperty((prevProperty) => ({
         ...prevProperty,
-        [name]: files[0]
+        [name]: value
       }));
-    } else {
-      if (name === 'description') {
-        // For textarea, directly update the value
-        setProperty((prevProperty) => ({
-          ...prevProperty,
-          [name]: value
-        }));
-      } else {
-        // For other inputs, update the value normally
-        setProperty((prevProperty) => ({
-          ...prevProperty,
-          [name]: value
-        }));
-      }
     }
   };
-  
 
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    const storageRef = ref(imageDb, `files/property${file.name}`);
+    await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(storageRef);
+    setPropertyImage(file);
+    setFileUrl(downloadURL);
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -48,6 +45,14 @@ const EditPropertyModal = ({ isOpen, onClose, onEditProperty, propertyToEdit }) 
         acc[key] = property[key];
         return acc;
       }, {});
+  
+      if (propertyImage) {
+        // Upload new image if it exists
+        const storageRef = ref(imageDb, `files/property${propertyImage.name}`);
+        await uploadBytes(storageRef, propertyImage);
+        const downloadURL = await getDownloadURL(storageRef);
+        updatedData.imgsrc = downloadURL;
+      }
   
       await axios.put(
         `${backendurl}/api/update/crud/updproperties/${property.id}`,
@@ -203,8 +208,8 @@ const EditPropertyModal = ({ isOpen, onClose, onEditProperty, propertyToEdit }) 
                 </select>
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="imgsrc" className="block text-gray-700 text-sm font-bold mb-2">Image Link from Firebase</label>
-                  <input type="text" placeholder='files%2F35abbcb4-5df7-469a-aff3-aa1dfbd3cabc' id="imgsrc" name="imgsrc" value={property.imgsrc} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                  <label htmlFor="imgsrc" className="block text-gray-700 text-sm font-bold mb-2">Property Photo</label>
+                  <input type="file" id="imgsrc" name="imgsrc" onChange={handleFileChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                 </div>
               </div>
               <div className="mb-4">
