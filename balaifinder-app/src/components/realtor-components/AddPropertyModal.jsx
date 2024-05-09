@@ -60,10 +60,17 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
       try {
         const userString = localStorage.getItem("user");
         if (!userString) {
-        console.error("User data not found in local storage");
+          console.error("User data not found in local storage");
+          // Handle the absence of user data here, such as redirecting to a login page
           return;
         }
-        const { id } = JSON.parse(userString);
+        const userData = JSON.parse(userString);
+        if (!userData || !userData.id) {
+          console.error("User ID not found in local storage data");
+          // Handle the absence of user ID here
+          return;
+        }
+        const { id } = userData;
         toast.success('Application Submitted Successfully.');
         const response = await axios.post(
           `${backendurl}/api/post/crud/addproperties`,
@@ -83,6 +90,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
       alert('Please fill in all required fields.');
     }
   };
+  
   
   if (!isOpen) return null;
 
