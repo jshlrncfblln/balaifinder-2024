@@ -58,6 +58,12 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
     e.preventDefault();
     if (formValid) {
       try {
+        const userString = localStorage.getItem("user");
+        if (!userString) {
+        console.error("User data not found in local storage");
+          return;
+        }
+        const { id } = JSON.parse(userString);
         toast.success('Application Submitted Successfully.');
         const response = await axios.post(
           `${backendurl}/api/post/crud/addproperties`,
