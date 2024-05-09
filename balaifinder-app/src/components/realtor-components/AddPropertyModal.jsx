@@ -73,7 +73,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
         const { id } = userData;
         toast.success('Application Submitted Successfully.');
         const response = await axios.post(
-          `${backendurl}/api/post/crud/addproperties`,
+          `${backendurl}/api/post/crud/addproperties/${id}`,
           {
             ...property,
             imgsrc: fileUrl, // Update property object with file URL
