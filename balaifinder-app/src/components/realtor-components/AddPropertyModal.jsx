@@ -3,6 +3,8 @@ import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { backendurl } from '../../../backend-connector';
+import { ref, uploadBytes, getDownloadURL } from "@firebase/storage";
+import { imageDb } from '../../../firebase';
 
 const AddPropertyModal = ({ isOpen, onClose }) => {
   const [property, setProperty] = useState({
@@ -25,6 +27,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
     imgsrc: "",
   });
   const [formValid, setFormValid] = useState(false);
+  const [propertyImage, setPropertyImage] = useState(null); // State to hold property image file
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,15 +44,27 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
     setFormValid(isValid);
   };
 
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    const storageRef = ref(imageDb, `files/${file.name}`);
+    await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(storageRef);
+    setPropertyImage(file);
+    setFileUrl(downloadURL);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formValid) {
       try {
-        await axios.post(
+        toast.success('Application Submitted Successfully.');
+        const response = await axios.post(
           `${backendurl}/api/post/crud/addproperties`,
-          property,
+          {
+            ...property,
+            imgsrc: fileUrl, // Update property object with file URL
+          }
         );
-  
         onClose();
         toast.success('Property Added Successfully.');
         console.log("Property added successfully!");
@@ -213,7 +228,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
               </div>
               <div className="mb-4">
                 <label htmlFor="imgsrc" className="block text-gray-700 text-sm font-bold mb-2">Image Link from Firebase</label>
-                <input type="text" placeholder='files%2F35abbcb4-5df7-469a-aff3-aa1dfbd3cabc' id="imgsrc" name="imgsrc" value={property.imgsrc} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                <input type="file" id="imgsrc" name="imgsrc" onChange={handleFileChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
               </div>
             </div>
             <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
