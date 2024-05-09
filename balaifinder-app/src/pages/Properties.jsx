@@ -2,9 +2,16 @@ import { useState, useEffect } from 'react';
 import Navbar from '../components/navbar';
 import PropLists from '../components/PropertyList';
 import Footer from '../components/Footer';
+import { backendurl } from "../../backend-connector";
 
 function Properties() {
+    const [priceFilter, setPriceFilter] = useState('');
+    const [locationFilter, setLocationFilter] = useState('');
+    const [propertyTypeFilter, setPropertyTypeFilter] = useState('');
     const [page, setPage] = useState(1);
+    const [priceRanges, setPriceRanges] = useState([]);
+    const [locations, setLocations] = useState([]);
+    const [propertyTypes, setPropertyTypes] = useState([]);
     const limit = 20; // Limit to 20 results per page
     return (
         <div>

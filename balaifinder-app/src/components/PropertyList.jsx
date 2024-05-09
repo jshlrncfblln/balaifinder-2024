@@ -1,80 +1,86 @@
-    import React, { useState, useEffect } from "react";
-    import axios from "axios";
-    import { backendurl } from "../../backend-connector";
-    import {Link} from "react-router-dom"
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { backendurl } from "../../backend-connector";
+import {Link} from "react-router-dom"
 
-    export default function PropLists({ }) {
-        const [data, setData] = useState([]);
-        const [totalPages, setTotalPages] = useState(1);
-        const [loading, setLoading] = useState(true);
+export default function PropLists({ page, limit, priceFilter, locationFilter, propertyTypeFilter, setPage }) {
+    const [data, setData] = useState([]);
+    const [totalPages, setTotalPages] = useState(1);
+    const [ skeleton, setSkeleton ] = useState(true)
 
-        const loadData = async () => {
-            try {
-                console.log('Loading data...');
-                const response = await axios.get(`${backendurl}/api/get/properties`);
-                console.log('Data loaded successfully:', response.data);
-                setData(response.data);
-                setTotalPages(Math.ceil(response.data.length / limit));
-                setLoading(false);
-            } catch (error) {
-                console.error('Error loading data:', error);
-                setLoading(false);
-            }
-        };
+    const loadData = async () => {
+        try {
+            console.log('Loading data...');
+            const response = await axios.get(`${backendurl}/api/get/properties`);
+            console.log('Data loaded successfully:', response.data);
+            setData(response.data);
+            setTotalPages(Math.ceil(response.data.length / limit));
+            setSkeleton(false)
+        } catch (error) {
+            console.error('Error loading data:', error);
+            setSkeleton(false)
+        }
+    };
 
-        useEffect(() => {
-            console.log('Effect triggered, loading data...');
-            loadData();
-        }, []);
+    useEffect(() => {
+        console.log('Effect triggered, loading data...');
+        loadData();
+    }, [page, limit, priceFilter, locationFilter, propertyTypeFilter]);
 
-        const startIndex = (page - 1) * limit;
-        const endIndex = startIndex + limit;
-        const currentData = filteredData.slice(startIndex, endIndex);
+    const filteredData = data.filter(item => {
+        if (priceFilter && item.price !== parseFloat(priceFilter)) return false;
+        if (locationFilter && item.location !== locationFilter) return false;
+        if (propertyTypeFilter && item.type !== propertyTypeFilter) return false;
+        return true;
+    });
 
-        const handlePageChange = (newPage) => {
-            setPage(newPage);
-        };
+    const startIndex = (page - 1) * limit;
+    const endIndex = startIndex + limit;
+    const currentData = filteredData.slice(startIndex, endIndex);
+
+    const handlePageChange = (newPage) => {
+        setPage(newPage);
+    };
+
+  // Badge logic based on data
+  /**const getBadgeText = (item) => {
+    if (item.status === 'active') {
+      return 'Active';
+    } else if (item.status === 'pending') {
+      return 'Pending';
+    } else if (item.status === 'new') {
+      return 'New Added';
+    } else if (item.status === 'sold') {
+      return 'Sold Out';
+    }
+    return '';
+  }; */
 
     // Badge logic based on data
-    /**const getBadgeText = (item) => {
-        if (item.status === 'active') {
-        return 'Active';
-        } else if (item.status === 'pending') {
-        return 'Pending';
-        } else if (item.status === 'new') {
-        return 'New Added';
-        } else if (item.status === 'sold') {
-        return 'Sold Out';
-        }
-        return '';
-    }; */
+    const getBadgeText = (item) => {
+        const statuses = ['Available', 'Pending', 'New Added', 'Sold Out'];
+        const randomIndex = Math.floor(Math.random() * statuses.length);
+        return statuses[randomIndex];
+    };
+  
 
-        // Badge logic based on data
-        const getBadgeText = (item) => {
-            const statuses = ['Available', 'Pending', 'New Added', 'Sold Out'];
-            const randomIndex = Math.floor(Math.random() * statuses.length);
-            return statuses[randomIndex];
-        };
-    
-
-        return (
-            <div className="w-fit mx-auto mt-10 mb-10">
-                <div className="grid grid-cols lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-6 gap-x-4">
-                    {loading ? (
-                        <div
-                        class="flex flex-col bg-neutral-300 w-56 h-64 animate-pulse rounded-xl p-4 gap-4"
-                      >
-                        <div class="bg-neutral-400/50 w-full h-32 animate-pulse rounded-md"></div>
-                        <div class="flex flex-col gap-2">
-                          <div class="bg-neutral-400/50 w-full h-4 animate-pulse rounded-md"></div>
-                          <div class="bg-neutral-400/50 w-4/5 h-4 animate-pulse rounded-md"></div>
-                          <div class="bg-neutral-400/50 w-full h-4 animate-pulse rounded-md"></div>
-                          <div class="bg-neutral-400/50 w-2/4 h-4 animate-pulse rounded-md"></div>
-                        </div>
-                      </div>
-                      
-                    ) : (
-                    <div>  
+    return (
+        <div className="w-fit mx-auto mt-10 mb-10">
+            <div className="grid grid-cols lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-6 gap-x-4">
+                {loading ? (
+                    <div
+                    class="flex flex-col bg-neutral-300 w-56 h-64 animate-pulse rounded-xl p-4 gap-4"
+                  >
+                    <div class="bg-neutral-400/50 w-full h-32 animate-pulse rounded-md"></div>
+                    <div class="flex flex-col gap-2">
+                      <div class="bg-neutral-400/50 w-full h-4 animate-pulse rounded-md"></div>
+                      <div class="bg-neutral-400/50 w-4/5 h-4 animate-pulse rounded-md"></div>
+                      <div class="bg-neutral-400/50 w-full h-4 animate-pulse rounded-md"></div>
+                      <div class="bg-neutral-400/50 w-2/4 h-4 animate-pulse rounded-md"></div>
+                    </div>
+                  </div>                  
+                ):(
+                    <div>
                         {currentData.map((item, index) => (
                             <div key={item.id} className="w-72 bg-white shadow-md shadow-black rounded-lg duration-500 hover:scale-105">
                                 {/* Badge */}
@@ -103,40 +109,40 @@
                                 </Link>
                             </div>
                         ))}
-                    </div> 
-                    )}
-                </div>
-                <div className="mb-4 flex justify-center space-x-4" aria-label="Pagination" style={{ marginTop: "20px" }}>
-                    <button
-                        disabled={page === 1}
-                        onClick={() => handlePageChange(page - 1)}
-                        className={`hover:bg-sky-700 hover:text-gray-100 rounded-lg border border-sky-500 px-2 py-2 text-gray-700 ${page === 1 ? 'cursor-not-allowed' : ''}`}
-                    >
-                        <span className="sr-only">Previous</span>
-                        <svg className="mt-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd"></path>
-                        </svg>
-                    </button>
-                    {Array.from({ length: totalPages > 5 ? 5 : totalPages }, (_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => handlePageChange(page + index)}
-                            className={`hover:bg-sky-700 hover:text-gray-100 rounded-lg border border-sky-500 px-4 py-2 text-gray-700 ${page === page + index ? 'bg-sky-500 text-white' : ''}`}
-                        >
-                            {page + index}
-                        </button>
-                    ))}
-                    <button
-                        disabled={page === totalPages}
-                        onClick={() => handlePageChange(page + 1)}
-                        className={`hover:bg-sky-700 hover:text-gray-100 rounded-lg border border-sky-500 px-2 py-2 text-gray-700 ${page === totalPages ? 'cursor-not-allowed' : ''}`}
-                    >
-                        <span className="sr-only">Next</span>
-                        <svg className="mt-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path>
-                        </svg>
-                    </button>
-                </div>
+                    </div>
+                )}
             </div>
-        );
-    }
+            <div className="mb-4 flex justify-center space-x-4" aria-label="Pagination" style={{ marginTop: "20px" }}>
+                <button
+                    disabled={page === 1}
+                    onClick={() => handlePageChange(page - 1)}
+                    className={`hover:bg-sky-700 hover:text-gray-100 rounded-lg border border-sky-500 px-2 py-2 text-gray-700 ${page === 1 ? 'cursor-not-allowed' : ''}`}
+                >
+                    <span className="sr-only">Previous</span>
+                    <svg className="mt-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd"></path>
+                    </svg>
+                </button>
+                {Array.from({ length: totalPages > 5 ? 5 : totalPages }, (_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => handlePageChange(page + index)}
+                        className={`hover:bg-sky-700 hover:text-gray-100 rounded-lg border border-sky-500 px-4 py-2 text-gray-700 ${page === page + index ? 'bg-sky-500 text-white' : ''}`}
+                    >
+                        {page + index}
+                    </button>
+                ))}
+                <button
+                    disabled={page === totalPages}
+                    onClick={() => handlePageChange(page + 1)}
+                    className={`hover:bg-sky-700 hover:text-gray-100 rounded-lg border border-sky-500 px-2 py-2 text-gray-700 ${page === totalPages ? 'cursor-not-allowed' : ''}`}
+                >
+                    <span className="sr-only">Next</span>
+                    <svg className="mt-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    );
+}
