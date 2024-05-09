@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import 'react-toastify/dist/ReactToastify.css';
-import { toast } from 'react-toastify';
 import { backendurl } from '../../../backend-connector';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { ref, uploadBytes, getDownloadURL } from "@firebase/storage";
 import { imageDb } from '../../../firebase';
 
@@ -47,7 +47,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
-    const storageRef = ref(imageDb, `files/${file.name}`);
+    const storageRef = ref(imageDb, `files/property/${file.name}`);
     await uploadBytes(storageRef, file);
     const downloadURL = await getDownloadURL(storageRef);
     setPropertyImage(file);
@@ -228,7 +228,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
                 <input type="text" id="description" name="description" value={property.description} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
               </div>
               <div className="mb-4">
-                <label htmlFor="imgsrc" className="block text-gray-700 text-sm font-bold mb-2">Image Link from Firebase</label>
+                <label htmlFor="imgsrc" className="block text-gray-700 text-sm font-bold mb-2">Property Photo</label>
                 <input type="file" id="imgsrc" name="imgsrc" onChange={handleFileChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
               </div>
             </div>
