@@ -28,6 +28,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
   });
   const [formValid, setFormValid] = useState(false);
   const [propertyImage, setPropertyImage] = useState(null); // State to hold property image file
+  const [fileUrl, setFileUrl] = useState(""); // State to hold the file URL
 
   const handleChange = (e) => {
     const { name, value } = e.target;
