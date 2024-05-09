@@ -57,11 +57,18 @@ export default function PropLists({ page, limit, priceFilter, locationFilter, pr
   }; */
 
     // Badge logic based on data
-    const getBadgeText = (item) => {
-        const statuses = ['Available', 'Pending', 'New Added', 'Sold Out'];
-        const randomIndex = Math.floor(Math.random() * statuses.length);
-        return statuses[randomIndex];
+    const getBadgeInfo = (item) => {
+        const statuses = {
+            'Available': 'bg-green-500',
+            'Pending': 'bg-yellow-500',
+            'New Added': 'bg-blue-500',
+            'Sold Out': 'bg-red-500'
+        };
+        const randomIndex = Math.floor(Math.random() * Object.keys(statuses).length);
+        const status = Object.keys(statuses)[randomIndex];
+        return { text: status, bgClass: statuses[status] };
     };
+    const { text, bgClass } = getBadgeInfo(item);
 
     const SkeletonCard = () => {
         <div
@@ -88,8 +95,8 @@ export default function PropLists({ page, limit, priceFilter, locationFilter, pr
                         <div key={item.id} className="w-72 bg-white shadow-md shadow-black rounded-lg duration-500 hover:scale-105">
                                 {/* Badge */}
                                 <div className="absolute top-0 right-0 mt-2 mr-2">
-                                    <span className={`inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 ${item.status === 'Available' ? 'bg-green-500' : item.status === 'Pending' ? 'bg-yellow-500' : item.status === 'New Added' ? 'bg-blue-500' : item.status === 'Sold Out' ? 'bg-red-500' : ''}`}>
-                                        {getBadgeText(item)}
+                                    <span className={`inline-block rounded-full px-3 py-1 text-sm font-semibold text-gray-700 ${bgClass}`}>
+                                    {text}
                                     </span>
                                 </div>
                                 <Link to={`/details/${item.id}`}>
