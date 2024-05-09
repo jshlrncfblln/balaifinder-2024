@@ -56,20 +56,6 @@ export default function PropLists({ page, limit, priceFilter, locationFilter, pr
     return '';
   }; */
 
-    // Badge logic based on data
-    const getBadgeInfo = (item) => {
-        const statuses = {
-            'Available': 'bg-green-500',
-            'Pending': 'bg-yellow-500',
-            'New Added': 'bg-blue-500',
-            'Sold Out': 'bg-red-500'
-        };
-        const randomIndex = Math.floor(Math.random() * Object.keys(statuses).length);
-        const status = Object.keys(statuses)[randomIndex];
-        return { text: status, bgClass: statuses[status] };
-    };
-    const { text, bgClass } = getBadgeInfo(item);
-
     const SkeletonCard = () => {
         <div
         class="flex flex-col bg-neutral-300 w-56 h-64 animate-pulse rounded-xl p-4 gap-4"
