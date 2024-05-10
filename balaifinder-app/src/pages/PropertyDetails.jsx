@@ -10,21 +10,52 @@ import "react-toastify/dist/ReactToastify.css";
 import { PiThumbsDownBold } from "react-icons/pi";
 import { PiThumbsUpBold } from "react-icons/pi";
 
+// Create a SkeletonLoader component for the loading state
+const SkeletonLoader = () => (
+  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="flex flex-col md:flex-row -mx-4">
+      <div className="md:flex-1 px-4">
+        <div className="h-[460px] rounded-lg bg-gray-200 dark:bg-gray-700 mb-4"></div>
+        <div className="flex justify-center mb-4">
+          <div className="w-1/2 px-2">
+            <button
+              type="submit"
+              className="inline-flex items-center text-center justify-center hover:shadow-md hover:shadow-black hover:bg-sky-700 w-full bg-sky-500 text-white py-2 px-4 rounded-xl font-semibold"
+            >
+              <PiThumbsUpBold className="mr-2" />
+              Wishlists
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="max-w-xl mx-auto px-4 py-6 bg-gray-200 dark:bg-gray-800 shadow-md rounded-lg">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-2">Loading...</h2>
+        <p className="font-bold text-gray-800 mb-4">Property Address: Not Available</p>
+        {[...Array(10)].map((_, i) => (
+          <div key={i} className="flex items-center">
+            <span className="font-bold text-gray-800 mr-4 w-1/4">Loading:</span>
+            <div className="my-2 w-3/4 h-4 bg-gray-300 dark:bg-gray-600 rounded-lg"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
 const PropertyDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true); // Add loading state
-
 
   useEffect(() => {
     setLoading(true);
     fetchProductById(id);
     const timeout = setTimeout(() => {
       setLoading(false);
-  }, 2000); // 2 seconds
+    }, 2000); // 2 seconds
 
-  return () => clearTimeout(timeout);
-}, [id]);
+    return () => clearTimeout(timeout);
+  }, [id]);
 
   const fetchProductById = async (id) => {
     try {
@@ -73,25 +104,15 @@ const PropertyDetails = () => {
         });
     
     } catch (error) {
-    toast.error("Ooopps! It didn't go well")
+      toast.error("Ooopps! It didn't go well")
       console.log("Error submitting preferences:", error);
     }
   };
 
-  if (!product || Object.keys(product).length === 0) {
+  if (loading || !product || Object.keys(product).length === 0) {
     return (
       <div className="flex justify-center items-center h-screen bg-white flex-col">
-          <div className="cube-loader">
-              <div className="cube-top"></div>
-              <div className="cube-wrapper">
-                  {[...Array(4)].map((_, i) => (
-                  <span key={i} className="cube-span" style={{ '--i': i }}>
-                      <img src="/assets/Balaifinder.png" alt="logo" />
-                  </span>
-                  ))}
-              </div>
-          </div>
-          <div className="mt-14 font-semibold text-xl">Loading...</div>
+        <SkeletonLoader />
       </div>
     );
   }
