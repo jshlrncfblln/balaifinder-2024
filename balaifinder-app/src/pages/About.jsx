@@ -12,19 +12,19 @@ function About() {
         <div className="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 mx-auto">
               <div class="bg-white rounded-lg shadow-lg p-8">
-                  <h2 class="text-xl font-bold text-gray-800 mb-4">Services</h2>
+                  <h2 class="text-xl font-bold text-gray-800 mb-4">Personalized Property Matching</h2>
                   <p class="text-gray-700">
                     Our website utilizes a sophisticated matching algorithm that considers factors such as location, property type, price range, and amenities to find the ideal home for every buyer. Whether you're looking for a cozy apartment in the city or a spacious house in the suburbs, our algorithm ensures that your preferences are met.
                   </p>
               </div>
               <div class="bg-white rounded-lg shadow-lg p-8">
-                  <h2 class="text-xl font-bold text-gray-800 mb-4">About Us</h2>
+                  <h2 class="text-xl font-bold text-gray-800 mb-4">Efficient Preference-based Property Search</h2>
                   <p class="text-gray-700">
                     With our matching algorithm, homebuyers can specify their preferences in detail, including the number of bedrooms, bathrooms, and desired square footage. Our system then sifts through thousands of listings to present you with options that best match your criteria, saving you time and effort in your property search.
                   </p>
               </div>
               <div class="bg-white rounded-lg shadow-lg p-8">
-                  <h2 class="text-xl font-bold text-gray-800 mb-4">Contact</h2>
+                  <h2 class="text-xl font-bold text-gray-800 mb-4">Tailored Recommendations for Your Dream Home</h2>
                   <p class="text-gray-700">
                     Our matching algorithm goes beyond basic filters to consider your lifestyle preferences, such as proximity to schools, parks, public transportation, and more. By analyzing these factors, we can provide you with personalized recommendations that align with your needs and preferences, making your homebuying journey more enjoyable and efficient.
                   </p>
