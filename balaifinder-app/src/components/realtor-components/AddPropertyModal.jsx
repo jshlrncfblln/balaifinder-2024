@@ -102,8 +102,8 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-        <div className="grid grid-cols-2 sm:grid-cols-1 inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl shadow-black transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          <form onSubmit={handleSubmit}>
+        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl shadow-black transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+          <form className="grid grid-cols-2 gap-4 sm:grid-cols-1" onSubmit={handleSubmit}>
             <h1 className='font-bold text-center text-3xl m-4'>PROPERTY DETAILS</h1>
             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div className="mb-4">
