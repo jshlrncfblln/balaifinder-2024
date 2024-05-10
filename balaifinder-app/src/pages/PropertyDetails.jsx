@@ -38,7 +38,8 @@ const PropertyDetails = () => {
       const response = await axios.get(`${backendurl}/api/get/properties/${id}`);
       setProduct(response.data);
     } catch (error) {
-      console.log("Error while fetching product by ID:", error);
+      console.error("Error while fetching product by ID:", error);
+      toast.error("Failed to fetch product details. Please try again later.");
     }
   };
 
