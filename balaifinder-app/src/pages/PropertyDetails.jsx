@@ -12,33 +12,19 @@ import { PiThumbsUpBold } from "react-icons/pi";
 
 // Create a SkeletonLoader component for the loading state
 const SkeletonLoader = () => (
-  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex flex-col md:flex-row -mx-4">
-      <div className="md:flex-1 px-4">
-        <div className="h-[460px] rounded-lg bg-gray-200 dark:bg-gray-700 mb-4"></div>
-        <div className="flex justify-center mb-4">
-          <div className="w-1/2 px-2">
-            <button
-              type="submit"
-              className="inline-flex items-center text-center justify-center hover:shadow-md hover:shadow-black hover:bg-sky-700 w-full bg-sky-500 text-white py-2 px-4 rounded-xl font-semibold"
-            >
-              <PiThumbsUpBold className="mr-2" />
-              Wishlists
-            </button>
+  <div class="py-4 rounded shadow-md w-60 sm:w-80 animate-pulse bg-gray-50">
+      <div class="flex p-4 space-x-4 sm:px-8">
+          <div class="flex-shrink-0 w-16 h-16 rounded-full bg-gray-300"></div>
+          <div class="flex-1 py-2 space-y-4">
+              <div class="w-full h-3 rounded bg-gray-300"></div>
+              <div class="w-5/6 h-3 rounded bg-gray-300"></div>
           </div>
-        </div>
       </div>
-      <div className="max-w-xl mx-auto px-4 py-6 bg-gray-200 dark:bg-gray-800 shadow-md rounded-lg">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-2">Loading...</h2>
-        <p className="font-bold text-gray-800 mb-4">Property Address: Not Available</p>
-        {[...Array(10)].map((_, i) => (
-          <div key={i} className="flex items-center">
-            <span className="font-bold text-gray-800 mr-4 w-1/4">Loading:</span>
-            <div className="my-2 w-3/4 h-4 bg-gray-300 dark:bg-gray-600 rounded-lg"></div>
-          </div>
-        ))}
+      <div class="p-4 space-y-4 sm:px-8">
+          <div class="w-full h-4 rounded bg-gray-300"></div>
+          <div class="w-full h-4 rounded bg-gray-300"></div>
+          <div class="w-3/4 h-4 rounded bg-gray-300"></div>
       </div>
-    </div>
   </div>
 );
 
@@ -111,8 +97,12 @@ const PropertyDetails = () => {
 
   if (loading || !product || Object.keys(product).length === 0) {
     return (
-      <div className="flex justify-center items-center h-screen bg-white flex-col">
-        <SkeletonLoader />
+      <div>
+        <Navbar/>
+        <div className="flex justify-center items-center h-screen bg-white flex-col">
+          <SkeletonLoader />
+        </div>
+        <Footer/>
       </div>
     );
   }
