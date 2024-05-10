@@ -7,24 +7,14 @@ import Navbar from "../components/navbar";
 import Footer from "../components/Footer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { PiThumbsDownBold } from "react-icons/pi";
 import { PiThumbsUpBold } from "react-icons/pi";
 
-// Create a SkeletonLoader component for the loading state
-const SkeletonLoader = () => (
-  <div class="py-4 rounded shadow-md w-60 sm:w-80 animate-pulse bg-gray-50">
-      <div class="flex p-4 space-x-4 sm:px-8">
-          <div class="flex-shrink-0 w-16 h-16 rounded-full bg-gray-300"></div>
-          <div class="flex-1 py-2 space-y-4">
-              <div class="w-full h-3 rounded bg-gray-300"></div>
-              <div class="w-5/6 h-3 rounded bg-gray-300"></div>
-          </div>
-      </div>
-      <div class="p-4 space-y-4 sm:px-8">
-          <div class="w-full h-4 rounded bg-gray-300"></div>
-          <div class="w-full h-4 rounded bg-gray-300"></div>
-          <div class="w-3/4 h-4 rounded bg-gray-300"></div>
-      </div>
+
+const Spinner = () => (
+  <div class="flex flex-row gap-2">
+    <div class="w-4 h-4 rounded-full bg-sky-500 animate-bounce"></div>
+    <div class="w-4 h-4 rounded-full bg-sky-500 animate-bounce [animation-delay:-.5s]"></div>
+    <div class="w-4 h-4 rounded-full bg-sky-500 animate-bounce [animation-delay:-.1s]"></div>
   </div>
 );
 
@@ -52,16 +42,8 @@ const PropertyDetails = () => {
     }
   };
 
-  const handleAcceptClick = (productId) => {
-    sendProductData(productId, 'ACCEPT');
-  };
-
   const handleLikeClick = (productId) => {
-    sendProductData(productId, 'LIKE');
-  };
-
-  const handleDenyClick = (productId) => {
-    sendProductData(productId, 'DENY');
+    sendProductData(productId, 'Added to your wishlist');
   };
 
   const sendProductData = (productId, action) => {
@@ -100,7 +82,7 @@ const PropertyDetails = () => {
       <div>
         <Navbar/>
         <div className="flex justify-center items-center h-screen bg-white flex-col">
-          <SkeletonLoader />
+          <Spinner />
         </div>
         <Footer/>
       </div>

@@ -10,6 +10,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
   const [property, setProperty] = useState({
     name: "",
     location: "",
+    address: "",
     type: "",
     price: "",
     monthly: "",
@@ -101,7 +102,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-        <div className="outline outline-1 inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl shadow-black transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div className={`outline outline-1 inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl shadow-black transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full ${sm ? 'grid grid-cols-1' : 'grid grid-cols-2'}`}>
           <form onSubmit={handleSubmit}>
             <h1 className='font-bold text-center text-3xl m-4'>PROPERTY DETAILS</h1>
             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -127,6 +128,10 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
                   <option value="Muntinlupa">Muntinlupa</option>
                   <option value="Pasig">Pasig</option>
                 </select>
+              </div>
+              <div className="mb-4">
+                <label htmlFor="address" className="block text-gray-700 text-sm font-bold mb-2">Property Address</label>
+                <input type="text" id="address" name="address" value={property.address} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
               </div>
               <div className="mb-4">
                 <label htmlFor="type" className="block text-gray-700 text-sm font-bold mb-2">Property Type</label>
