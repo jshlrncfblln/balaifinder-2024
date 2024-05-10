@@ -41,7 +41,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
   };
 
   const validateForm = () => {
-    const requiredFields = ['name', 'location', 'type', 'price', 'monthly', 'nearelementary', 'nearhighschool', 'nearcollege', 'nearmall', 'nearchurch', 'numBedrooms', 'numBathrooms', 'typeoflot', 'familysize', 'businessready', 'description'];
+    const requiredFields = ['name', 'location', 'address', 'type', 'price', 'monthly', 'nearelementary', 'nearhighschool', 'nearcollege', 'nearmall', 'nearchurch', 'numBedrooms', 'numBathrooms', 'typeoflot', 'familysize', 'businessready', 'description'];
     const isValid = requiredFields.every(field => property[field].trim() !== '');
     setFormValid(isValid);
   };
@@ -102,10 +102,10 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl shadow-black transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          <form className="grid grid-cols-2 gap-4 sm:grid-cols-1" onSubmit={handleSubmit}>
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl shadow-black transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-4/5">
+          <form onSubmit={handleSubmit}>
             <h1 className='font-bold text-center text-3xl m-4'>PROPERTY DETAILS</h1>
-            <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div className="bg-white grid grid-cols-2 gap-4 px-8 pt-5 pb-4 sm:pb-4">
               <div className="mb-4">
                 <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Property Name</label>
                 <input type="text" id="name" name="name" value={property.name} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
