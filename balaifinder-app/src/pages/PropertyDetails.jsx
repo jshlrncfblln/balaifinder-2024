@@ -115,7 +115,7 @@ const PropertyDetails = () => {
                       <div class="max-w-xl mx-auto px-4 py-6 bg-white shadow-md rounded-lg">
                         <h2 class="text-2xl font-semibold text-gray-800 mb-2">{product.name}</h2>
                         <p class="font-bold text-gray-800 mb-4">
-                            Property Address: Not Available
+                            Property Address: <span class="text-gray-600">{product.address}</span>
                         </p>
                         <div class="grid grid-cols-2 md:grid-cols-2 gap-4 mb-4">
 
