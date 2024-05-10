@@ -49,7 +49,13 @@ export default function ManageProperty(){
   
     const getProperties = async () => {
       try {
-          const response = await axios.get(`${backendurl}/api/get/properties`);
+          const userString = localStorage.getItem("user");
+          if (!userString) {
+            console.error("User data not found in local storage");
+            return;
+          }
+          const { id } = JSON.parse(userString);
+          const response = await axios.get(`${backendurl}/api/get/${id}/properties`);
           console.log('Properties response:', response.data);
           setProperties(response.data);
       } catch (error) {
