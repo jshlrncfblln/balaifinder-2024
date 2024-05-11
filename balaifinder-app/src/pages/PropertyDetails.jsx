@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PiThumbsUpBold } from "react-icons/pi";
+import { BiHomeHeart } from "react-icons/bi";
 
 
 const Spinner = () => (
@@ -103,87 +104,79 @@ const PropertyDetails = () => {
                                   alt="Product Image"
                               />
                           </div>
-                          <div class="flex justify-center mb-4">
-                              <div class="w-1/2 px-2">
-                                  <button type="submit" onClick={() => handleLikeClick(product.id)} class="inline-flex items-center text-center justify-center hover:shadow-md hover:shadow-black hover:bg-sky-700 w-full bg-sky-500 text-white py-2 px-4 rounded-xl font-semibold">
-                                    <PiThumbsUpBold className="mr-2" />
-                                    Wishlists
-                                  </button>
-                              </div>
-                          </div>
                       </div>
                       <div class="max-w-xl mx-auto px-4 py-6 bg-white shadow-md rounded-lg">
-                        <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">{product.name}</h2>
-                        <p class="font-semibold text-gray-800 mb-4 mx-4">
+                        <h2 class="text-2xl sm:text-sm font-bold text-center text-gray-800 mb-2">{product.name}</h2>
+                        <p class="font-semibold sm:text-sm text-gray-800 mb-4 mx-4">
                             Property Address: <span class="text-gray-600 font-normal">{product.address ? product.address : 'No Available Address'}</span>
                         </p>
                         <div class="grid grid-cols-2 md:grid-cols-2 gap-4 mb-4 mx-4">
-                            <div class="items-center">
+                            <div class="items-center sm:text-sm">
                                 <span class="font-semibold text-gray-800">Price:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">₱ {new Intl.NumberFormat().format(product.price)}</span>
                                 </div>
                             </div>
-                            <div class="items-center">
+                            <div class="items-center sm:text-sm">
                                 <span class="font-semibold text-gray-800">Monthly Installment:</span>
                                 <div className='my-2'>
                                   <span class="text-gray-600">{product.monthly}</span>
                                 </div>
                             </div>
                             <hr /><hr />
-                            <div class="items-center">
+                            <div class="items-center sm:text-sm">
                                 <span class="font-semibold text-gray-800">City Located:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.location}</span>
                                 </div>
                             </div>
-                            <div class="items-center">
+                            <div class="items-center sm:text-sm">
                                 <span class="font-semibold text-gray-800">Type of Lot:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.typeoflot}</span>
                                 </div>
                             </div>
                             <hr /><hr />
-                            <div class="items-center">
+                            <div class="items-center sm:text-sm">
                                 <span class="font-semibold text-gray-800">Family Size:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.familysize}</span>
                                 </div>
                             </div>
-                            <div class="items-center">
+                            <div class="items-center sm:text-sm">
                                 <span class="font-semibold text-gray-800">Business Ready:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.businesssready}</span>
                                 </div>
                             </div>
                             <hr /><hr />
-                            <div class="items-center">
+                            <div class="items-center sm:text-sm">
                                 <span class="font-semibold text-gray-800">Number of Bedrooms:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.numberofbedroom}</span>
                                 </div>
                             </div>
-                            <div class="items-center">
+                            <div class="items-center sm:text-sm">
                                 <span class="font-semibold text-gray-800">Number of Bathrooms:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.numberofbathroom}</span>
                                 </div>
                             </div>
                             <hr /><hr />
-                            <div class="items-center">
+                            <div class="items-center sm:text-sm">
                                 <span class="font-semibold text-gray-800">Near an Elementary School:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.nearelementary}</span>
                                 </div>
                             </div>
-                            <div class="items-center">
+                            <div class="items-center sm:text-sm">
                                 <span class="font-semibold text-gray-800">Near a High School:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.nearhighschool}</span>
                                 </div>
                             </div>
                             <hr /><hr />
-                            <div class="items-center">
+                            <div class="items-center sm:text-sm">
                                 <span class="font-semibold text-gray-800">Near a College University:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.nearcollege}</span>
@@ -191,11 +184,17 @@ const PropertyDetails = () => {
                             </div>
                         </div>
                         <hr />
-                        <div class="mx-4 mt-2">
+                        <div class="mx-4 mt-2 sm:text-sm">
                           <span class="font-semibold text-gray-800">Description:</span>
                           <div className="my-2">
                             <p class="text-gray-600 text-sm">{product.description}</p>
                           </div>
+                        </div>
+                        <div class="w-full my-4 px-2">
+                          <button type="submit" onClick={() => handleLikeClick(product.id)} class="inline-flex items-center text-center justify-center hover:shadow-md hover:shadow-black hover:bg-sky-700 w-full bg-sky-500 text-white py-2 px-4 rounded-xl font-semibold">
+                            <BiHomeHeart className="mr-2" />
+                            Add to Wishlists
+                          </button>
                         </div>
                       </div>
                   </div>
