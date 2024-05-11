@@ -154,6 +154,10 @@ function Navbar() {
                 >
                   Login
                 </button>
+                <Login
+                isOpen={isOpenLogin}
+                onClose={() => setIsOpenLogin(false)}
+              />
               </div>
             )}
           </div>

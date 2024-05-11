@@ -100,7 +100,7 @@ const PropertyDetails = () => {
                           <div class="h-[460px] rounded-lg bg-black dark:bg-gray-700 mb-4">
                               <img
                                   class="w-full h-full object-cover"
-                                  src={product.imgsrc ? product.imgsrc : 'https://img.freepik.com/free-photo/house-isolated-field_1303-23773.jpg?t=st=1710318322~exp=1710321922~hmac=1797b6b00add732c13f15b3160cb99f3c7e6fe2e9fb745a53d801c74a968fe8b&w=1380'}
+                                  src={product.imgsrc ? product.imgsrc : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'}
                                   alt="Product Image"
                               />
                           </div>
@@ -116,7 +116,7 @@ const PropertyDetails = () => {
                       <div class="max-w-xl mx-auto px-4 py-6 bg-white shadow-md rounded-lg">
                         <h2 class="text-2xl font-semibold text-gray-800 mb-2">{product.name}</h2>
                         <p class="font-bold text-gray-800 mb-4">
-                            Property Address: <span class="text-gray-600">{product.address}</span>
+                            Property Address: <span class="text-gray-600">{product.address ? product.address : 'No Available Address'}</span>
                         </p>
                         <div class="grid grid-cols-2 md:grid-cols-2 gap-4 mb-4">
 
