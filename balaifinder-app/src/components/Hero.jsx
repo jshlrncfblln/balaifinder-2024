@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
 
 function Hero() {
+  //THIS IS THE SETTINGS FOR THE SLIDER
     const settings = {
         dots: false,
         infinite: true,
@@ -44,8 +45,9 @@ function Hero() {
             </div>         
           </div>
           <div className="mt-12 md:mt-0">
+            {/* THIS LINE OF CODE IS FOR THE SLIDER OF IMAGES*/}
             <Slider {...settings}>
-              <div className='rounded-lg'>
+              <div className='rounded-xl'>
                 <img src="/assets/house-image-1.jpg" alt="Slide 1" style={imageStyle} />
               </div>
               <div className='rounded-lg'>
@@ -54,7 +56,6 @@ function Hero() {
               <div className='rounded-lg'>
                 <img src="/assets/townhouse-image-3.jpg" alt="Slide 3" style={imageStyle} />
               </div>
-              {/* Add more slides as needed */}
             </Slider>
           </div>
         </div>

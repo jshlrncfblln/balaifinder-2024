@@ -106,7 +106,7 @@ const PropertyDetails = () => {
                           </div>
                           <div class="flex justify-center mb-4">
                               <div class="w-1/2 px-2">
-                                  <button type="submit" onClick={() => handleLikeClick(product.id)} class="inline-flex items-center text-center justify-center hover:shadow-md hover:shadow-black hover:bg-sky-700 w-full bg-sky-500 text-white py-2 px-4 rounded-xl font-semibold">
+                                  <button type="submit" onClick={() => handleLikeClick(product.id)} class="inline-items-center text-center justify-center hover:shadow-md hover:shadow-black hover:bg-sky-700 w-full bg-sky-500 text-white py-2 px-4 rounded-xl font-semibold">
                                     <PiThumbsUpBold className="mr-2" />
                                     Wishlists
                                   </button>
@@ -114,91 +114,90 @@ const PropertyDetails = () => {
                           </div>
                       </div>
                       <div class="max-w-xl mx-auto px-4 py-6 bg-white shadow-md rounded-lg">
-                        <h2 class="text-2xl font-semibold text-gray-800 mb-2">{product.name}</h2>
-                        <p class="font-bold text-gray-800 mb-4">
-                            Property Address: <span class="text-gray-600">{product.address ? product.address : 'No Available Address'}</span>
-                        </p>
+                        <h2 class="text-2xl font-semibold text-gray-800 mb-2 text-center">{product.name}</h2>
+                        <p class="font-semibold text-gray-800 mb-4">Property Address:</p> <span class="text-gray-600">{product.address ? product.address : 'No Available Address'}</span>
                         <div class="grid grid-cols-2 md:grid-cols-2 gap-4 mb-4">
 
-                            <div class="flex items-center">
-                                <span class="font-semibold text-gray-800">Price:</span>
+                            <div class="items-center">
+                                <span class="font-semibold text-gray-800">Property Price:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">₱ {new Intl.NumberFormat().format(product.price)}</span>
                                 </div>
                             </div>
-
-                            <div class="flex items-center">
-                                <span class="font-bold text-gray-800">Monthly Installment:</span>
+                            <hr />
+                            <div class="items-center">
+                                <span class="font-semibold text-gray-800">Monthly Installment:</span>
                                 <div className='my-2'>
                                   <span class="text-gray-600">{product.monthly}</span>
                                 </div>
                             </div>
-
-                            <div class="flex items-center">
+                            <hr />
+                            <div class="items-center">
                                 <span class="font-semibold text-gray-800">City Located:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.location}</span>
                                 </div>
                             </div>
-
-                            <div class="flex items-center">
-                                <span class="font-bold text-gray-800">Type of Lot:</span>
+                            <hr />
+                            <div class="items-center">
+                                <span class="font-semibold text-gray-800">Type of Lot:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.typeoflot}</span>
                                 </div>
                             </div>
-
-                            <div class="flex items-center">
-                                <span class="font-bold text-gray-800">Family Size:</span>
+                            <hr />
+                            <div class="items-center">
+                                <span class="font-semibold text-gray-800">Family Size:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.familysize}</span>
                                 </div>
                             </div>
-
-                            <div class="flex items-center">
-                                <span class="font-bold text-gray-800">Business Ready:</span>
+                            <hr />
+                            <div class="items-center">
+                                <span class="font-semibold text-gray-800">Business Ready:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.businesssready}</span>
                                 </div>
                             </div>
 
-                            <div class="flex items-center">
-                                <span class="font-bold text-gray-800">Number of Bedrooms:</span>
+                            <div class="items-center">
+                                <span class="font-semibold text-gray-800">Number of Bedrooms:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.numberofbedroom}</span>
                                 </div>
                             </div>
 
-                            <div class="flex items-center">
-                                <span class="font-bold text-gray-800">Number of Bathrooms:</span>
+                            <div class="items-center">
+                                <span class="font-semibold text-gray-800">Number of Bathrooms:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.numberofbathroom}</span>
                                 </div>
                             </div>
 
-                            <div class="flex items-center">
-                                <span class="font-bold text-gray-800">Near an Elementary School:</span>
+                            <div class="items-center">
+                                <span class="font-semibold text-gray-800">Near an Elementary School:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.nearelementary}</span>
                                 </div>
                             </div>
 
-                            <div class="flex items-center">
-                                <span class="font-bold text-gray-800">Near a High School:</span>
+                            <div class="items-center">
+                                <span class="font-semibold text-gray-800">Near a High School:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.nearhighschool}</span>
                                 </div>
                             </div>
 
-                            <div class="flex items-center">
-                                <span class="font-bold text-gray-800">Near a College University:</span>
+                            <div class="items-center">
+                                <span class="font-semibold text-gray-800">Near a University:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.nearcollege}</span>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                          <span class="font-bold text-gray-800">Description:</span>
+                        <hr />
+                        <div className="p-4 text-center">
+                          <span class="font-semibold text-gray-800">Description:</span>
                           <div className="my-2">
                             <p class="text-gray-600 text-sm">{product.description}</p>
                           </div>
