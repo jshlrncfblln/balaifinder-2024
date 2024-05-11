@@ -116,29 +116,26 @@ const PropertyDetails = () => {
                       <div class="max-w-xl mx-auto px-4 py-6 bg-white shadow-md rounded-lg">
                         <h2 class="text-2xl font-semibold text-gray-800 mb-2 text-center">{product.name}</h2>
                         <p class="font-semibold text-gray-800 mb-4">Property Address:</p> <span class="text-gray-600">{product.address ? product.address : 'No Available Address'}</span>
-                        <div class="grid grid-cols-2 md:grid-cols-2 gap-4 mb-4">
-
+                        <div class="grid grid-cols-2 md:grid-cols-2 gap-4 mb-4 p-4">
                             <div class="items-center">
                                 <span class="font-semibold text-gray-800">Property Price:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">₱ {new Intl.NumberFormat().format(product.price)}</span>
                                 </div>
                             </div>
-                            <hr />
                             <div class="items-center">
                                 <span class="font-semibold text-gray-800">Monthly Installment:</span>
                                 <div className='my-2'>
                                   <span class="text-gray-600">{product.monthly}</span>
                                 </div>
                             </div>
-                            <hr />
                             <div class="items-center">
                                 <span class="font-semibold text-gray-800">City Located:</span>
                                 <div className="my-2">
                                   <span class="text-gray-600">{product.location}</span>
                                 </div>
                             </div>
-                            <hr />
+
                             <div class="items-center">
                                 <span class="font-semibold text-gray-800">Type of Lot:</span>
                                 <div className="my-2">
