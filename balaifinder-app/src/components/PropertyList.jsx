@@ -3,7 +3,7 @@ import axios from "axios";
 import { backendurl } from "../../backend-connector";
 import {Link} from "react-router-dom"
 
-export default function     PropLists({ page, limit, priceFilter, locationFilter, propertyTypeFilter, setPage }) {
+export default function PropLists({ page, limit, setPage }) {
     const [data, setData] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
     const [ skeleton, setSkeleton ] = useState(true)
@@ -25,14 +25,8 @@ export default function     PropLists({ page, limit, priceFilter, locationFilter
     useEffect(() => {
         console.log('Effect triggered, loading data...');
         loadData();
-    }, [page, limit, priceFilter, locationFilter, propertyTypeFilter]);
+    }, [page, limit]);
 
-    const filteredData = data.filter(item => {
-        if (priceFilter && item.price !== parseFloat(priceFilter)) return false;
-        if (locationFilter && item.location !== locationFilter) return false;
-        if (propertyTypeFilter && item.type !== propertyTypeFilter) return false;
-        return true;
-    });
 
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;

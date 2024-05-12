@@ -4,15 +4,31 @@ import PropLists from '../components/PropertyList';
 import Footer from '../components/Footer';
 import { backendurl } from "../../backend-connector";
 
+
 function Properties() {
-    const [priceFilter, setPriceFilter] = useState('');
-    const [locationFilter, setLocationFilter] = useState('');
-    const [propertyTypeFilter, setPropertyTypeFilter] = useState('');
     const [page, setPage] = useState(1);
-    const [priceRanges, setPriceRanges] = useState([]);
+    const limit = 20; // Limit to 20 results per page
     const [locations, setLocations] = useState([]);
     const [propertyTypes, setPropertyTypes] = useState([]);
-    const limit = 20; // Limit to 20 results per page
+
+    useEffect(() => {
+        // Fetch locations from the API
+        console.log("Fetching Locations Data...")
+        fetch(`${backendurl}/api/get/option/location`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Locations fetch successfully', data);
+                setLocations(data);
+            })
+            .catch(error => console.error('Error fetching locations:', error));
+
+        // Fetch property types from the API
+        console.log("Fetching Property type Data....")
+        fetch(`${backendurl}/api/get/option/type`)
+            .then(response => response.json())
+            .then(data => setPropertyTypes(data))
+            .catch(error => console.error('Error fetching property types:', error));
+    }, []);
     return (
         <div>
             <Navbar />
@@ -44,10 +60,12 @@ function Properties() {
                             <select
                                 className="w-1/3 p-3 rounded-md border border-1 border-sky-500 text-sm">
                                 <option value=""disabled selected hidden>Select Location</option>
+                                {/* FETCH THE LOCATION IN THE DATABASE*/}
                             </select>
                             <select
                                 className="w-1/3 p-3 rounded-md border border-1 border-sky-500 text-sm">
                                 <option value=""disabled selected hidden>Property Type</option>
+                                {/*FETCH ALSO THE PROPERTY TYPE IN THE DATABASE*/}
                             </select>
                         </div>
     

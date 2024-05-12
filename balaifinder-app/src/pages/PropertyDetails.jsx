@@ -79,12 +79,12 @@ const PropertyDetails = () => {
     }
   };
 
-  //add logic on how to map random properties here
+  //THIS IS THE LOGIC FOR DISPLAYING SUGGESTED PROPERTIES
   const fetchRandomProperties = async () => {
     try {
       const response = await axios.get(`${backendurl}/api/get/properties?limit=6`);
       const filteredProperties = response.data.filter(property => property.id !== id);
-      setRandomProperties(filteredProperties);
+      setRandomProperties(filteredProperties.slice(0, 6));//SPLICE THE FETCH DATA INTO 6 PROPERTIES ONLY
       console.log("Fetching properties successfully!")
     } catch (error) {
       console.log("Error while fetching random properties:", error);
