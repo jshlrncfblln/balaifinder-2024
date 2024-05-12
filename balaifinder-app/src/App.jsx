@@ -122,15 +122,25 @@ function App() {
 }
 
 function RealtorRoutes() {
+  const { currentUser } = useContext(AuthContext);
+
+  const ProtectedRealtorRoute = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to="/realtor"    />;
+    }
+
+    return children;
+  };
+
   return (
     <Routes>
         <Route path="/" element={<RealtorLogin />} />
         <Route path="/registration" element={<RealtorRegister />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
-        <Route path="/manage-property" element={<Layout><Manage /></Layout>} />
-        <Route path="/application" element={<Layout><ApplicationList /></Layout>} />
-        <Route path="/settings" element={<Layout><Settings /></Layout>} />
+        <Route path="/forgot-password" element={<ProtectedRealtorRoute><ForgotPassword /></ProtectedRealtorRoute>} />
+        <Route path="/dashboard" element={<ProtectedRealtorRoute><Layout><Dashboard /></Layout></ProtectedRealtorRoute>} />
+        <Route path="/manage-property" element={<ProtectedRealtorRoute><Layout><Manage /></Layout></ProtectedRealtorRoute>} />
+        <Route path="/application" element={<ProtectedRealtorRoute><Layout><ApplicationList /></Layout></ProtectedRealtorRoute>} />
+        <Route path="/settings" element={<ProtectedRealtorRoute><Layout><Settings /></Layout></ProtectedRealtorRoute>} />
     </Routes>
   );
 }
