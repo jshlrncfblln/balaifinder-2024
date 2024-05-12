@@ -26,7 +26,7 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
-    const storageRef = ref(imageDb, `files/${file.name}`);
+    const storageRef = ref(imageDb, `files/useruploads${file.name}`);
     await uploadBytes(storageRef, file);
     const downloadURL = await getDownloadURL(storageRef);
     if (e.target.name === 'certificate') {
