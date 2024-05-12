@@ -3,7 +3,7 @@ import axios from "axios";
 import { backendurl } from "../../backend-connector";
 import {Link} from "react-router-dom"
 
-export default function PropLists({ page, limit, priceFilter, locationFilter, propertyTypeFilter, setPage }) {
+export default function     PropLists({ page, limit, priceFilter, locationFilter, propertyTypeFilter, setPage }) {
     const [data, setData] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
     const [ skeleton, setSkeleton ] = useState(true)
