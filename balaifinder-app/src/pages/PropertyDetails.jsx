@@ -82,14 +82,20 @@ const PropertyDetails = () => {
   //THIS IS THE LOGIC FOR DISPLAYING SUGGESTED PROPERTIES
   const fetchRandomProperties = async () => {
     try {
-      const response = await axios.get(`${backendurl}/api/get/properties?limit=6&location=${product.location}&minPrice=${product.price - 50000}&maxPrice=${product.price + 50000}&type=${product.typeoflot}`);
-      const filteredProperties = response.data.filter(property => property.id !== id);
-      setRandomProperties(filteredProperties.slice(0, 6));
+      const response = await axios.get(`${backendurl}/api/get/properties?limit=100`); // Fetch a larger number of properties
+      const filteredProperties = response.data.filter(property => 
+        property.id !== id && // Exclude the current property
+        property.location === product.location && // Match location
+        property.typeoflot === product.typeoflot && // Match property type
+        property.price >= product.price - 50000 && property.price <= product.price + 50000 // Match price range
+      );
+      setRandomProperties(filteredProperties.slice(0, 6)); // Slice to get the first 6 similar properties
       console.log("Fetching similar properties successfully!");
     } catch (error) {
       console.log("Error while fetching similar properties:", error);
     }
   };
+  
   
   
 
