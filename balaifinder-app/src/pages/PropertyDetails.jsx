@@ -22,7 +22,7 @@ const Spinner = () => (
 const PropertyDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true); // Add loading statedada
   const [randomProperties, setRandomProperties] = useState([]);
 
   useEffect(() => {
@@ -82,14 +82,15 @@ const PropertyDetails = () => {
   //THIS IS THE LOGIC FOR DISPLAYING SUGGESTED PROPERTIES
   const fetchRandomProperties = async () => {
     try {
-      const response = await axios.get(`${backendurl}/api/get/properties?limit=6`);
+      const response = await axios.get(`${backendurl}/api/get/properties?limit=6&location=${product.location}&minPrice=${product.price - 50000}&maxPrice=${product.price + 50000}&type=${product.typeoflot}`);
       const filteredProperties = response.data.filter(property => property.id !== id);
-      setRandomProperties(filteredProperties.slice(0, 6));//SPLICE THE FETCH DATA INTO 6 PROPERTIES ONLY
-      console.log("Fetching properties successfully!")
+      setRandomProperties(filteredProperties.slice(0, 6));
+      console.log("Fetching similar properties successfully!");
     } catch (error) {
-      console.log("Error while fetching random properties:", error);
+      console.log("Error while fetching similar properties:", error);
     }
   };
+  
   
 
   if (loading || !product || Object.keys(product).length === 0) {
@@ -214,8 +215,9 @@ const PropertyDetails = () => {
                   </div>
               </div>
         </div> 
-        <div className="bg-white my-8 w-full">
-          <h3 className="text-4xl font-bold mb-4 text-gray-800">Suggested <span className="text-sky-500">Properties</span></h3>
+        {/**This part is for the Suggested Properties */}
+        <div className="w-fit mx-auto mt-10 mb-10">
+          <h3 className="text-4xl font-bold mb-4 text-gray-800 text-center">Suggested <span className="text-sky-500">Properties</span></h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {/*here should put the random properties*/}
             {randomProperties.length > 0 ? (
