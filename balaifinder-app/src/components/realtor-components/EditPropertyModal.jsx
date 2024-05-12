@@ -48,7 +48,7 @@ const EditPropertyModal = ({ isOpen, onClose, onEditProperty, propertyToEdit }) 
   
       if (propertyImage) {
         // Upload new image if it exists
-        const storageRef = ref(imageDb, `files/property${propertyImage.name}`);
+        const storageRef = ref(imageDb, `files/property/${propertyImage.name}`);
         await uploadBytes(storageRef, propertyImage);
         const downloadURL = await getDownloadURL(storageRef);
         updatedData.imgsrc = downloadURL;
