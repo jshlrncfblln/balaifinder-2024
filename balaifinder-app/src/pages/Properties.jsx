@@ -3,6 +3,7 @@ import Navbar from '../components/navbar';
 import PropLists from '../components/PropertyList';
 import Footer from '../components/Footer';
 import { backendurl } from "../../backend-connector";
+import axios from "axios";
 
 
 function Properties() {
@@ -12,24 +13,20 @@ function Properties() {
     const [propertyTypes, setPropertyTypes] = useState([]);
 
     useEffect(() => {
-        // Fetch locations from the API
-        console.log("Fetching Locations Data...")
-        fetch(`${backendurl}/api/get/option/location`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Locations fetch successfully', data);
-                setLocations(data);
-            })
-            .catch(error => console.error('Error fetching locations:', error));
-
-        // Fetch property types from the API
-        console.log("Fetching Property type Data....")
-        fetch(`${backendurl}/api/get/option/type`)
-            .then(response => response.json())
-            .then(data => {
-                console.log("Property type fetch successfully" , data)
-                setPropertyTypes(data)})
-            .catch(error => console.error('Error fetching property types:', error));
+        try{
+            console.log("TRYING TO LOAD DATA")
+            const loadData = async () => {
+                const [locationResponse, typeResponse] = await Promise.all([
+                    axios.get(`${backendurl}/api/get/option/location`),
+                    axios.get(`${backendurl}/api/get/option/type`),
+                ]);
+                setLocationData(locationResponse.data);
+                setTypeData(typeResponse.data);
+            };
+            loadData();
+        }catch(error){
+            console.error("FAILED TO LOAD DATA", error);
+        }
     }, []);
     return (
         <div>
@@ -63,16 +60,16 @@ function Properties() {
                                 className="w-1/3 p-3 rounded-md border border-1 border-sky-500 text-sm">
                                 <option value=""disabled selected hidden>Select Location</option>
                                 {/* FETCH THE LOCATION IN THE DATABASE*/}
-                                {location.map(location => (
-                                    <option value={location.id}>{location.name}</option>
+                                {location.map((item , index) => (
+                                    <option key={index} value={item.location}>{item.location}</option>
                                 ))}
                             </select>
                             <select
                                 className="w-1/3 p-3 rounded-md border border-1 border-sky-500 text-sm">
                                 <option value=""disabled selected hidden>Property Type</option>
                                 {/*FETCH ALSO THE PROPERTY TYPE IN THE DATABASE*/}
-                                {propertyTypes.map(propertyTypes => (
-                                    <option value={propertyTypes.id}> {propertyTypes.name} </option>
+                                {propertyTypes.map((item , index) => (
+                                    <option key={index} value={item.propertyTypes}>{item.propertyTypes}</option>
                                 ))}
                             </select>
                         </div>
