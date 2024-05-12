@@ -30,7 +30,6 @@ export default function PropLists({ page, limit, setPage }) {
 
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;
-    const currentData = filteredData.slice(startIndex, endIndex);
 
     const handlePageChange = (newPage) => {
         setPage(newPage);
