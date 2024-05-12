@@ -3,16 +3,31 @@ import Navbar from '../components/navbar';
 import PropLists from '../components/PropertyList';
 import Footer from '../components/Footer';
 import { backendurl } from "../../backend-connector";
+import axios from "axios";
+
 
 function Properties() {
-    const [priceFilter, setPriceFilter] = useState('');
-    const [locationFilter, setLocationFilter] = useState('');
-    const [propertyTypeFilter, setPropertyTypeFilter] = useState('');
     const [page, setPage] = useState(1);
-    const [priceRanges, setPriceRanges] = useState([]);
-    const [locations, setLocations] = useState([]);
-    const [propertyTypes, setPropertyTypes] = useState([]);
     const limit = 20; // Limit to 20 results per page
+    const [location, setLocationData] = useState([]);
+    const [propertyTypes, setPropertyTypeData] = useState([]);
+
+    useEffect(() => {
+        try{
+            console.log("TRYING TO LOAD DATA")
+            const loadData = async () => {
+                const [locationResponse, typeResponse] = await Promise.all([
+                    axios.get(`${backendurl}/api/get/option/location`),
+                    axios.get(`${backendurl}/api/get/option/type`),
+                ]);
+                setLocationData(locationResponse.data);
+                setPropertyTypeData(typeResponse.data);
+            };
+            loadData();
+        }catch(error){
+            console.error("FAILED TO LOAD DATA", error);
+        }
+    }, []);
     return (
         <div>
             <Navbar />
@@ -44,10 +59,18 @@ function Properties() {
                             <select
                                 className="w-1/3 p-3 rounded-md border border-1 border-sky-500 text-sm">
                                 <option value=""disabled selected hidden>Select Location</option>
+                                {/* FETCH THE LOCATION IN THE DATABASE*/}
+                                {location.map((item , index) => (
+                                    <option key={index} value={item.location}>{item.location}</option>
+                                ))}
                             </select>
                             <select
                                 className="w-1/3 p-3 rounded-md border border-1 border-sky-500 text-sm">
                                 <option value=""disabled selected hidden>Property Type</option>
+                                {/*FETCH ALSO THE PROPERTY TYPE IN THE DATABASE*/}
+                                {propertyTypes.map((item , index) => (
+                                    <option key={index} value={item.type}>{item.type}</option>
+                                ))}
                             </select>
                         </div>
     

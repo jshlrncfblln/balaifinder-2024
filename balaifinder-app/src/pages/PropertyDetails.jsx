@@ -22,7 +22,7 @@ const Spinner = () => (
 const PropertyDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true); // Add loading statedada
   const [randomProperties, setRandomProperties] = useState([]);
 
   useEffect(() => {
@@ -79,19 +79,34 @@ const PropertyDetails = () => {
     }
   };
 
-  //add logic on how to map random properties here
+  //THIS IS THE LOGIC FOR DISPLAYING SUGGESTED PROPERTIES
   const fetchRandomProperties = async () => {
     try {
-      const response = await axios.get(`${backendurl}/api/get/properties?limit=6`);
-      const filteredProperties = response.data.filter(property => property.id !== id);
-      setRandomProperties(filteredProperties);
-      console.log("Fetching properties successfully!")
+      const response = await axios.get(`${backendurl}/api/get/properties?limit=100`); // Fetch a larger number of properties
+      const filteredProperties = response.data.filter(property =>
+        property.id !== id && // Exclude the current property
+        property.location === product.location && // Match location
+        property.typeoflot === product.typeoflot && // Match property type
+        property.price >= product.price - 50000 && property.price <= product.price + 50000 // Match price range
+      );
+  
+      // If there are fewer than 6 similar properties, repeat the process with a larger price range
+      let similarProperties = [];
+      let priceRange = 50000;
+      while (similarProperties.length < 6 && priceRange <= 200000) {
+        similarProperties = filteredProperties.filter(property =>
+          property.price >= product.price - priceRange && property.price <= product.price + priceRange
+        );
+        priceRange += 50000; // Increase the price range
+      }
+  
+      setRandomProperties(similarProperties.slice(0, 6)); // Slice to get the first 6 similar properties
+      console.log("Fetching similar properties successfully!");
     } catch (error) {
-      console.log("Error while fetching random properties:", error);
+      console.log("Error while fetching similar properties:", error);
     }
   };
   
-
   if (loading || !product || Object.keys(product).length === 0) {
     return (
       <div>
@@ -214,8 +229,9 @@ const PropertyDetails = () => {
                   </div>
               </div>
         </div> 
-        <div className="bg-white my-8 w-full">
-          <h3 className="text-4xl font-bold mb-4 text-gray-800">Suggested <span className="text-sky-500">Properties</span></h3>
+        {/**This part is for the Suggested Properties */}
+        <div className="w-fit mx-auto mt-10 mb-10">
+          <h3 className="text-4xl font-bold mb-4 text-gray-800 text-center">Suggested <span className="text-sky-500">Properties</span></h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {/*here should put the random properties*/}
             {randomProperties.length > 0 ? (
