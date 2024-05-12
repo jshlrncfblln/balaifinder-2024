@@ -59,7 +59,7 @@ const PropertyDetails = () => {
       }
       const { id } = JSON.parse(userString);
 
-      axios.post(`${backendurl}/api/post/${id}/ald`, {
+      axios.post(`${backendurl}/api/post/${id}/like`, {
         productId: productId,
         action: action
       }, { withCredentials: true }) // Send cookies with the request
