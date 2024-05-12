@@ -69,7 +69,7 @@ function Properties() {
                                 <option value=""disabled selected hidden>Property Type</option>
                                 {/*FETCH ALSO THE PROPERTY TYPE IN THE DATABASE*/}
                                 {propertyTypes.map((item , index) => (
-                                    <option key={index} value={item.propertyTypes}>{item.propertyTypes}</option>
+                                    <option key={index} value={item.type}>{item.type}</option>
                                 ))}
                             </select>
                         </div>
