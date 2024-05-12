@@ -73,7 +73,6 @@ const PropertyDetails = () => {
             console.error("Error inserting product data:", error);
           }
         });
-    
     } catch (error) {
       toast.error("Ooopps! It didn't go well")
       console.log("Error submitting preferences:", error);
@@ -84,7 +83,9 @@ const PropertyDetails = () => {
   const fetchRandomProperties = async () => {
     try {
       const response = await axios.get(`${backendurl}/api/get/properties?limit=6`);
-      setRandomProperties(response.data);
+      const filteredProperties = response.data.filter(property => property.id !== id);
+      setRandomProperties(filteredProperties);
+      console.log("Fetching properties successfully!")
     } catch (error) {
       console.log("Error while fetching random properties:", error);
     }
@@ -213,29 +214,31 @@ const PropertyDetails = () => {
                   </div>
               </div>
         </div> 
-        <div className="bg-white my-8 w-full flex justify-center items-center">
-          <h3 className="text-2xl font-bold mb-4 text-gray-800">Suggested <span className="text-sky-500">Properties</span></h3>
+        <div className="bg-white my-8 w-full">
+          <h3 className="text-4xl font-bold mb-4 text-gray-800">Suggested <span className="text-sky-500">Properties</span></h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {/*here should put the random properties*/}
             {randomProperties.length > 0 ? (
               randomProperties.map((property) => (
-                <Link to={`/details/${property.id}`}>
-                  <img src={property.imgsrc ? property.imgsrc : 'https://img.freepik.com/free-photo/house-isolated-field_1303-23773.jpg?t=st=1710318322~exp=1710321922~hmac=1797b6b00add732c13f15b3160cb99f3c7e6fe2e9fb745a53d801c74a968fe8b&w=1380'} alt="Property" className="h-52 w-full" />
-                  <div className="px-4 py-3 w-72">
-                      <span className="text-gray-400 mr-3 uppercase text-xs">{property.type}</span>
-                      <p className="text-lg font-bold text-black truncate block capitalize">{property.name}</p>
-                      <p className="text-lg font-bold text-black truncate block capitalize">{property.location}</p>
-                      <div className="flex items-center">
-                      <p className="text-lg font-semibold text-black cursor-auto my-3">₱{new Intl.NumberFormat().format(property.price)}</p>
-                        <div className="ml-auto">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-bag-plus" viewBox="0 0 16 16">
-                            <path fillRule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"/>
-                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
-                          </svg>
+                <div key={property.id} className="w-72 bg-white shadow-md shadow-black rounded-lg duration-500 hover:scale-105 relative">
+                  <Link to={`/details/${property.id}`}>
+                    <img src={property.imgsrc ? property.imgsrc : 'https://img.freepik.com/free-photo/house-isolated-field_1303-23773.jpg?t=st=1710318322~exp=1710321922~hmac=1797b6b00add732c13f15b3160cb99f3c7e6fe2e9fb745a53d801c74a968fe8b&w=1380'} alt="Property" className="h-52 w-full" />
+                    <div className="px-4 py-3 w-72">
+                        <span className="text-gray-400 mr-3 uppercase text-xs">{property.type}</span>
+                        <p className="text-lg font-bold text-black truncate block capitalize">{property.name}</p>
+                        <p className="text-lg font-bold text-black truncate block capitalize">{property.location}</p>
+                        <div className="flex items-center">
+                        <p className="text-lg font-semibold text-black cursor-auto my-3">₱{new Intl.NumberFormat().format(property.price)}</p>
+                          <div className="ml-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-bag-plus" viewBox="0 0 16 16">
+                              <path fillRule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"/>
+                              <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                            </svg>
+                          </div>
                         </div>
-                      </div>
-                  </div>
-                </Link>
+                    </div>
+                  </Link>
+                </div>
               ))
             ) :(
               <div>NO SUGGESTED PROPERTIES AVAILABLE</div>
