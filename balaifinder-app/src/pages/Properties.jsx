@@ -9,8 +9,8 @@ import axios from "axios";
 function Properties() {
     const [page, setPage] = useState(1);
     const limit = 20; // Limit to 20 results per page
-    const [location, setLocations] = useState([]);
-    const [propertyTypes, setPropertyTypes] = useState([]);
+    const [location, setLocationData] = useState([]);
+    const [propertyTypes, setPropertyTypeData] = useState([]);
 
     useEffect(() => {
         try{
@@ -21,7 +21,7 @@ function Properties() {
                     axios.get(`${backendurl}/api/get/option/type`),
                 ]);
                 setLocationData(locationResponse.data);
-                setTypeData(typeResponse.data);
+                setPropertyTypeData(typeResponse.data);
             };
             loadData();
         }catch(error){
