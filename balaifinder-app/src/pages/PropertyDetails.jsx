@@ -83,22 +83,30 @@ const PropertyDetails = () => {
   const fetchRandomProperties = async () => {
     try {
       const response = await axios.get(`${backendurl}/api/get/properties?limit=100`); // Fetch a larger number of properties
-      const filteredProperties = response.data.filter(property => 
+      const filteredProperties = response.data.filter(property =>
         property.id !== id && // Exclude the current property
         property.location === product.location && // Match location
         property.typeoflot === product.typeoflot && // Match property type
         property.price >= product.price - 50000 && property.price <= product.price + 50000 // Match price range
       );
-      setRandomProperties(filteredProperties.slice(0, 6)); // Slice to get the first 6 similar properties
+  
+      // If there are fewer than 6 similar properties, repeat the process with a larger price range
+      let similarProperties = [];
+      let priceRange = 50000;
+      while (similarProperties.length < 6 && priceRange <= 200000) {
+        similarProperties = filteredProperties.filter(property =>
+          property.price >= product.price - priceRange && property.price <= product.price + priceRange
+        );
+        priceRange += 50000; // Increase the price range
+      }
+  
+      setRandomProperties(similarProperties.slice(0, 6)); // Slice to get the first 6 similar properties
       console.log("Fetching similar properties successfully!");
     } catch (error) {
       console.log("Error while fetching similar properties:", error);
     }
   };
   
-  
-  
-
   if (loading || !product || Object.keys(product).length === 0) {
     return (
       <div>
