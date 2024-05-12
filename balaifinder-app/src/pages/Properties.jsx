@@ -26,7 +26,9 @@ function Properties() {
         console.log("Fetching Property type Data....")
         fetch(`${backendurl}/api/get/option/type`)
             .then(response => response.json())
-            .then(data => setPropertyTypes(data))
+            .then(data => {
+                console.log("Property type fetch successfully" , data)
+                setPropertyTypes(data)})
             .catch(error => console.error('Error fetching property types:', error));
     }, []);
     return (
@@ -62,7 +64,7 @@ function Properties() {
                                 <option value=""disabled selected hidden>Select Location</option>
                                 {/* FETCH THE LOCATION IN THE DATABASE*/}
                                 {location.map(location => (
-                                    <option key={location.id} value={location.id}>{location.name}</option>
+                                    <option value={location.id}>{location.name}</option>
                                 ))}
                             </select>
                             <select
@@ -70,7 +72,7 @@ function Properties() {
                                 <option value=""disabled selected hidden>Property Type</option>
                                 {/*FETCH ALSO THE PROPERTY TYPE IN THE DATABASE*/}
                                 {propertyTypes.map(propertyTypes => (
-                                    <option key={propertyTypes.id} value={propertyTypes.id}> {propertyTypes.name} </option>
+                                    <option value={propertyTypes.id}> {propertyTypes.name} </option>
                                 ))}
                             </select>
                         </div>
