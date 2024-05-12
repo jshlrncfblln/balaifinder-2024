@@ -19,14 +19,7 @@ const ApplicationList = () => {
     }, []);
 
     const fetchApplications = () => {
-        try {
-            const userString = localStorage.getItem("user");
-            if (!userString) {
-              console.error("User data not found in local storage");
-              return;
-            }
-            const { id: userId } = JSON.parse(userString);
-            axios.get(`${backendurl}/api/get/${userId}/applications`)
+        axios.get(`${backendurl}/api/get/applications`)
             .then(response => {
                 // Map through applications and fetch property details for each
                 Promise.all(response.data.map(application =>
@@ -47,9 +40,10 @@ const ApplicationList = () => {
                     // Handle error
                 });
             })
-        } catch (error) {
-            console.error('Error fetching Applications:', error);
-        }
+            .catch(error => {
+                console.error('Error fetching applications:', error);
+                // Handle error
+            });
     };
 
     const handleUpdateButtonClick = (application) => {
