@@ -33,10 +33,17 @@ const RealtorLogin = () => {
   
     try {
       await realtorLogin({ email, password }); // Pass email and password as an object
+      if (response && response.status === 400 && response.data === "Wrong password or email!") {
+        toast.error("Incorrect email or password!");
+    } else if (response && response.status === 403 && response.data === 'Email not verified. Please verify your email before logging in.') {
+        toast.error('Email not verified. Please verify your email before logging in.');
+    } else {
       navigate("/realtor/manage-property");
       toast.success('Login successful!');
-    } catch (err) {
+    } 
+  } catch (err) {
       toast.error(err.error || 'An error occurred. Please try again.');
+      console.error('Login Error:', err); // Debugging
     }
   };
 

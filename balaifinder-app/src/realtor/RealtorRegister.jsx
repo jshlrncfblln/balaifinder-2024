@@ -102,7 +102,7 @@ export default function RealtorRegister() {
                     }
                 );
                 navigate("/realtor/");
-                toast.success('Registration successful! Welcome to Realtor BalaiFinder.');
+                toast.success('Registration successful! Welcome to Realtor BalaiFinder. Check Email for Verification');
             } catch (err) {
                 console.error("Registration error:", err);
                 toast.error('Registration failed. Please try again.');
