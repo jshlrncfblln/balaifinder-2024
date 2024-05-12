@@ -61,11 +61,17 @@ function Properties() {
                                 className="w-1/3 p-3 rounded-md border border-1 border-sky-500 text-sm">
                                 <option value=""disabled selected hidden>Select Location</option>
                                 {/* FETCH THE LOCATION IN THE DATABASE*/}
+                                {location.map(location => (
+                                    <option key={location.id} value={location.id}>{location.name}</option>
+                                ))}
                             </select>
                             <select
                                 className="w-1/3 p-3 rounded-md border border-1 border-sky-500 text-sm">
                                 <option value=""disabled selected hidden>Property Type</option>
                                 {/*FETCH ALSO THE PROPERTY TYPE IN THE DATABASE*/}
+                                {propertyTypes.map(propertyTypes => (
+                                    <option key={propertyTypes.id} value={propertyTypes.id}> {propertyTypes.name} </option>
+                                ))}
                             </select>
                         </div>
     
