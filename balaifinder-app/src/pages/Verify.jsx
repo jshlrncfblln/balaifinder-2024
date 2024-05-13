@@ -24,7 +24,22 @@ function VerifyEmailPage() {
         // Handle verification error
         setVerificationMessage(error.response.data.error);
       });
+
+      axios.put(`${backendurl}/api/relauth/verify/${token}`)
+      .then(response => {
+        // Handle successful verification
+        setVerificationMessage(response.data.message);
+        setTimeout(() => {
+            navigate('/');
+          }, 3000);
+      })
+      .catch(error => {
+        // Handle verification error
+        setVerificationMessage(error.response.data.error);
+      });
   }, []);
+
+  
 
   return (
     <div className="container">
