@@ -277,7 +277,7 @@ export default function PreferenceSettings({ onClose, onSubmit }) {
                                           <option value="4">4</option>
                                       </select>
                                 </div>                  
-                                <div className="mb-2">
+                                <div className="mb-24">
                                       <p className="text-center text-xl mb-2 sm:text-xs">How big your family size?</p>
                                       <select name="familysize" value={formData.familysize} onChange={e => setFormData(prevData => ({ ...prevData, familysize: e.target.value }))} className="flex h-10 w-full items-center justify-between bg-background px-3 py-2 text-sm sm:text-xs placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 rounded-full border-sky-500 border-[2px]">
                                           <option selected disabled hidden value="">Please Select</option>
@@ -290,7 +290,7 @@ export default function PreferenceSettings({ onClose, onSubmit }) {
                               </div>
                           )}
                         </div>
-                    <div className="flex flex-col md:flex-row justify-between gap-4 md:gap-8 mt-2 mb-2">
+                    <div className="flex flex-col md:flex-row justify-between gap-4 md:gap-8 mt-4 mb-2">
                       {currentStep > 1 && (
                         <button type="button" onClick={prevStep} className="mx-auto mt-2 border border-1 border-sky-500 hover:bg-sky-500 hover:border-sky-700 hover:text-white w-9/12 px-3 py-2 text-gray-800 font-bold rounded-lg">
                           Previous
