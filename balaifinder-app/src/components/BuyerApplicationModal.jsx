@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ref, uploadBytes, getDownloadURL } from "@firebase/storage";
 import { imageDb } from '../../firebase';
 
-const ApplyModal = ({ isOpen, onClose, propertyId }) => {
+const ApplyModal = ({ isOpen, onClose, propertyId, realtorId }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -53,6 +53,7 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
         },
         body: JSON.stringify({
           propertyId: propertyId,
+          realtorId: realtorId, // Include realtorId
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,

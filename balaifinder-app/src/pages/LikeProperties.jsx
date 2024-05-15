@@ -8,6 +8,7 @@ const PropertyCheckoutPage = () => {
   const [likes, setlikes] = useState([]);
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [selectedPropertyId, setSelectedPropertyId] = useState(null);
+  const [selectedRealtorId, setSelectedRealtorId] = useState(null);
 
   useEffect(() => {
       fetchlikes();
@@ -33,17 +34,16 @@ const PropertyCheckoutPage = () => {
       }
   };
 
-  const openApplyModal = (propertyId) => {
+  const openApplyModal = (propertyId, realtorId) => {
     setIsApplyModalOpen(true);
-    setSelectedPropertyId(propertyId); // Set selected property_id
-};
-
+    setSelectedPropertyId(propertyId);
+    setSelectedRealtorId(realtorId); // Set selected realtor_id
+  };
 
   const closeApplyModal = () => {
       setIsApplyModalOpen(false);
   };
       
-
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -69,7 +69,7 @@ const PropertyCheckoutPage = () => {
                   <p className="text-lg font-bold mt-2">₱ {new Intl.NumberFormat().format(property.price)}</p>
                 </div>
                 <button
-                  onClick={() => openApplyModal(property.id)}
+                  onClick={() => openApplyModal(property.id, property.realtorId)} // Pass realtorId as well
                   className="font-semibold mt-4 w-full bg-sky-500 text-white py-2 px-4 rounded-lg hover:bg-sky-700"
                 >
                   Apply
@@ -80,7 +80,7 @@ const PropertyCheckoutPage = () => {
         )}
       </div>
       <Footer />
-      <ApplyModal isOpen={isApplyModalOpen} onClose={closeApplyModal} propertyId={selectedPropertyId} />
+      <ApplyModal isOpen={isApplyModalOpen} onClose={closeApplyModal} propertyId={selectedPropertyId} realtorId={selectedRealtorId} />
     </div>
   );
 };
