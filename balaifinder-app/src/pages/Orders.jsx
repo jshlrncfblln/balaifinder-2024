@@ -82,6 +82,7 @@ const Orders = () => {
                     <h2 className="text-lg font-bold">{property.name}</h2>
                     <p className="text-sm text-gray-500">{property.type} - {property.location}</p>
                     <p className="text-lg font-bold mt-2">₱ {new Intl.NumberFormat().format(property.price)}</p>
+                    <h2 className="text-lg font-bold">{status.comment}</h2>
                   </div>
                 </div>
               ))}
