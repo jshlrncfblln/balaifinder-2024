@@ -19,7 +19,14 @@ const ApplicationList = () => {
     }, []);
 
     const fetchApplications = () => {
-        axios.get(`${backendurl}/api/get/applications`)
+        const userString = localStorage.getItem("user");
+        if (!userString) {
+            console.error("User data not found in local storage");
+            return;
+        }
+        const { id } = JSON.parse(userString);
+
+        axios.get(`${backendurl}/api/get/applications/${id}`)
             .then(response => {
                 // Map through applications and fetch property details for each
                 Promise.all(response.data.map(application =>
