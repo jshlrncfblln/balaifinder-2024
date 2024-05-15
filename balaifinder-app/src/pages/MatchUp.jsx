@@ -60,14 +60,16 @@ export default function Introduction() {
         </div>
       </div>
       {showSettingsModal && (
-        <CSSTransition
-          in={showSettingsModal} // Use the showSettingsModal state variable here
-          timeout={300}
-          classNames="modal"
-          unmountOnExit
-        >
-          <PreferenceSettingsModal onClose={closeSettingsModal} onSubmit={handleSubmitSettings} />
-        </CSSTransition>
+        <TransitionGroup>
+          <CSSTransition
+            in={showSettingsModal} // Use the showSettingsModal state variable here
+            timeout={300}
+            classNames="modal"
+            unmountOnExit
+          >
+            <PreferenceSettingsModal onClose={closeSettingsModal} onSubmit={handleSubmitSettings} />
+          </CSSTransition>
+        </TransitionGroup>
       )}
       {showResultModal && <ResultSection resultsData={resultsData} onClose={closeResultModal}/>}
       <Footer />
