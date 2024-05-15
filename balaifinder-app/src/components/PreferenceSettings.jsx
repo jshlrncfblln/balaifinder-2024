@@ -140,7 +140,7 @@ export default function PreferenceSettings({ onClose, onSubmit }) {
       <>
         <ToastContainer />
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
-          <div className="shadow-xl inset-0 max-w-5xl md:max-w-5xl px-4 py-4 bg-white rounded-lg overflow-y-auto">
+          <div className="shadow-xl inset-0 max-w-5xl md:max-w-5xl px-4 py-4 bg-white rounded-lg overflow-y-auto h-full md:h-4/5">
             <form onSubmit={handleSubmit} className="relative flex flex-col">
                   <button onClick={onClose} className="px-2 py-2 absolute top-4 right-4 hover:bg-red-500 hover:text-white rounded-full">
                     <GrClose />
