@@ -8,6 +8,7 @@ const Orders = () => {
   const [application, setApplication] = useState([]);
   const [selectedPropertyId, setSelectedPropertyId] = useState(null);
   const [status, setStatus] = useState('');
+  const [comments, setComments] = useState('');
 
   useEffect(() => {
       const fetchUserData = async () => {
@@ -32,7 +33,8 @@ const Orders = () => {
           }
           const statusData = await statusResponse.json();
           console.log("Status data:", statusData);
-          setStatus(statusData);
+          setStatus(statusData.status);
+          setComments(statusData.comments);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -76,12 +78,15 @@ const Orders = () => {
                   />
                   {status && (
                     // Dynamically set the background color of the status badge based on the status
-                    <span className={`${getStatusColor(status.status)} text-white py-1 px-2 rounded-full text-xs absolute top-2 right-2`}>{status.status}</span>
+                    <span className={`${getStatusColor(status)} text-white py-1 px-2 rounded-full text-xs absolute top-2 right-2`}>{status}</span>
                   )}
                   <div className="mt-2">
                     <h2 className="text-lg font-bold">{property.name}</h2>
                     <p className="text-sm text-gray-500">{property.type} - {property.location}</p>
                     <p className="text-lg font-bold mt-2">₱ {new Intl.NumberFormat().format(property.price)}</p>
+                    {comments && (
+                    <p className="text-sm text-gray-700 mt-2">Comments: {comments}</p>
+                  )}
                   </div>
                 </div>
               ))}
