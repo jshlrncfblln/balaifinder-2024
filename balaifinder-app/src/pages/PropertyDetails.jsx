@@ -129,7 +129,7 @@ const PropertyDetails = () => {
                           <div class="h-[460px] rounded-lg bg-black mb-4">
                               <img
                                   class="w-full h-full object-cover"
-                                  src={product.imgsrc ? product.imgsrc : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'}
+                                  src={product.imgsrc ? product.imgsrc : 'https://img.freepik.com/free-photo/house-isolated-field_1303-23773.jpg?t=st=1710318322~exp=1710321922~hmac=1797b6b00add732c13f15b3160cb99f3c7e6fe2e9fb745a53d801c74a968fe8b&w=1380'}
                                   alt="Product Image"
                               />
                           </div>
