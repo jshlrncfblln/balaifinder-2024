@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { backendurl } from '../../backend-connector';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -26,7 +27,8 @@ const ApplyModal = ({ isOpen, onClose, propertyId, realtorId }) => {
         const { id } = JSON.parse(userString);
 
         const response = await axios.get(`${backendurl}/api/users/${id}/profile`);
-        setFormData(response.data);
+        const { firstName, lastName, email } = response.data;
+        setFormData({ firstName, lastName, email });
       } catch (error) {
         console.error('Error fetching user profile:', error);
       }
@@ -71,7 +73,7 @@ const ApplyModal = ({ isOpen, onClose, propertyId, realtorId }) => {
         },
         body: JSON.stringify({
           propertyId,
-          realtorId, // Include realtorId
+          realtorId,
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
