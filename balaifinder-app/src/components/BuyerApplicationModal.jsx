@@ -24,15 +24,22 @@ const ApplyModal = ({ isOpen, onClose, propertyId, realtorId }) => {
           console.error("User data not found in local storage");
           return;
         }
+        
         const { id } = JSON.parse(userString);
+        console.log("User ID:", id);
 
         const response = await axios.get(`${backendurl}/api/users/${id}/profile`);
-        
-        // Log the response data to check its structure
-        console.log('User profile data:', response.data);
+        console.log('API Response:', response);
 
-        // Update this destructuring based on the logged response structure
-        const { firstName, lastName, email } = response.data; // Adjust if needed based on the log
+        // Verify response structure
+        if (!response.data || !response.data.user) {
+          console.error('User data not found in response:', response.data);
+          return;
+        }
+
+        const { firstName, lastName, email } = response.data.user;
+        console.log('Extracted User Data:', { firstName, lastName, email });
+
         setFormData({ firstName, lastName, email });
       } catch (error) {
         console.error('Error fetching user profile:', error);
