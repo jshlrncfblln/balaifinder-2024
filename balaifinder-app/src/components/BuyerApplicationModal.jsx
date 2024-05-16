@@ -15,6 +15,26 @@ const ApplyModal = ({ isOpen, onClose, propertyId, realtorId }) => {
   const [fileUrl, setFileUrl] = useState(null);
   const [companyIdFileUrl, setCompanyIdFileUrl] = useState(null);
 
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const userString = localStorage.getItem("user");
+        if (!userString) {
+          console.error("User data not found in local storage");
+          return;
+        }
+        const { id } = JSON.parse(userString);
+
+        const response = await axios.get(`${backendurl}/api/users/${id}/profile`);
+        setFormData(response.data);
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
