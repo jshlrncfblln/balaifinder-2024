@@ -27,8 +27,9 @@ const ApplyModal = ({ isOpen, onClose, propertyId, realtorId }) => {
         const { id } = JSON.parse(userString);
 
         const response = await axios.get(`${backendurl}/api/users/${id}/profile`);
-        const { firstName, lastName, email } = response.data;
+        const { firstName, lastName, email } = response.data.user;
         setFormData({ firstName, lastName, email });
+
       } catch (error) {
         console.error('Error fetching user profile:', error);
       }
