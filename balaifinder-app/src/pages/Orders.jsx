@@ -68,10 +68,10 @@ const Orders = () => {
               <p className="text-xl text-gray-400 mt-14">There's no house listed in your application. Browse property and add it here.</p>
             </div>
           ) : (
-            <div key={property.id} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
               {application.map((property, index) => (
                 <div key={index} className="bg-white rounded-lg border border-1 border-gray-400 shadow-md p-4 relative">
-                  <im g
+                  <img
                     src={property.imgsrc ? property.imgsrc : 'https://img.freepik.com/free-photo/house-isolated-field_1303-23773.jpg?t=st=1710318322~exp=1710321922~hmac=1797b6b00add732c13f15b3160cb99f3c7e6fe2e9fb745a53d801c74a968fe8b&w=1380'}
                     alt={property.name}
                     className="h-40 w-full object-cover rounded-lg"
@@ -88,7 +88,7 @@ const Orders = () => {
                     <p className="text-sm text-gray-700 mt-2">Comments: {comments}</p>
                   )}
                   </div>
-                </div>  
+                </div>
               ))}
             </div>
           )}
