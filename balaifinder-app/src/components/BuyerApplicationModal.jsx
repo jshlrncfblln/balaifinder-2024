@@ -27,9 +27,13 @@ const ApplyModal = ({ isOpen, onClose, propertyId, realtorId }) => {
         const { id } = JSON.parse(userString);
 
         const response = await axios.get(`${backendurl}/api/users/${id}/profile`);
-        const { firstName, lastName, email } = response.data.user;
-        setFormData({ firstName, lastName, email });
+        
+        // Log the response data to check its structure
+        console.log('User profile data:', response.data);
 
+        // Update this destructuring based on the logged response structure
+        const { firstName, lastName, email } = response.data; // Adjust if needed based on the log
+        setFormData({ firstName, lastName, email });
       } catch (error) {
         console.error('Error fetching user profile:', error);
       }
