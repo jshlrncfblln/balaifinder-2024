@@ -128,15 +128,15 @@ const ApplyModal = ({ isOpen, onClose, propertyId, realtorId }) => {
               <h2 className="text-sm text-center text-gray-500 mb-2">Complete the form below to apply for this property</h2>
               <div className="mb-4">
                 <label htmlFor="firstName" className="block text-gray-700 text-sm font-bold mb-2">First Name</label>
-                <input type="text" id="firstName" name="firstName" value={formData.first_name} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                <input type="text" id="firstName" name="firstName" value={formData.first_name} onChange={handleChange} required disabled className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
               </div>
               <div className="mb-4">
                 <label htmlFor="lastName" className="block text-gray-700 text-sm font-bold mb-2">Last Name</label>
-                <input type="text" id="lastName" name="lastName" value={formData.last_name} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                <input type="text" id="lastName" name="lastName" value={formData.last_name} onChange={handleChange} required disabled className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
               </div>
               <div className="mb-4">
                 <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required disabled className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
               </div>
               <div className="mb-4">
                 <label htmlFor="certificate" className="block text-gray-700 text-sm font-bold mb-2">Certificate</label>
