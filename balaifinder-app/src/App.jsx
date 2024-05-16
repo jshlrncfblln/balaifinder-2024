@@ -27,6 +27,7 @@ import UserForgotPassword from './pages/UserForgatPass';
 import Test from './components/testrealtor';
 import Verify from './pages/Verify';
 import Orders from './pages/Orders';
+import ChangePass from './pages/ChangePassword';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -95,6 +96,7 @@ function App() {
                 <Route path="/user-registration" element={<Register />} />
                 <Route path="/verify/:token" element={<Verify />} />
                 <Route path="/realtor/*" element={<RealtorRoutes />} />
+                <Route path="/user-change-password" element={<ProtectedRoute><ChangePass /></ProtectedRoute>} />
                 <Route path="/user-forgot-password" element={<ProtectedRoute><UserForgotPassword /></ProtectedRoute>} />
                 <Route path="/" element={<ResultSection />} />
                 <Route path="/property-wishlists" element={<ProtectedRoute><LikeProperties /></ProtectedRoute>} />

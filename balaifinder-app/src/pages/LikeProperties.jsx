@@ -8,41 +8,41 @@ const PropertyCheckoutPage = () => {
   const [likes, setlikes] = useState([]);
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [selectedPropertyId, setSelectedPropertyId] = useState(null);
+  const [selectedRealtorId, setSelectedRealtorId] = useState(null);
 
   useEffect(() => {
-      fetchlikes();
+    fetchlikes();
   }, []);
 
   const fetchlikes = async () => {
-      try {
-         const userString = localStorage.getItem("user");
-          if (!userString) {
-            console.error("User data not found in local storage");
-            return;
-          }
-          const { id } = JSON.parse(userString);
-          
-          const response = await fetch(`${backendurl}/api/get/${id}/likes`);
-          if (!response.ok) {
-              throw new Error('Failed to fetch User likes');
-          }
-          const data = await response.json();
-          setlikes(data);
-      } catch (error) {
-          console.error('Error fetching likes:', error);
+    try {
+      const userString = localStorage.getItem("user");
+      if (!userString) {
+        console.error("User data not found in local storage");
+        return;
       }
+      const { id } = JSON.parse(userString);
+      
+      const response = await fetch(`${backendurl}/api/get/${id}/likes`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch User likes');
+      }
+      const data = await response.json();
+      setlikes(data);
+    } catch (error) {
+      console.error('Error fetching likes:', error);
+    }
   };
 
-  const openApplyModal = (propertyId) => {
+  const openApplyModal = (propertyId, realtorId) => {
     setIsApplyModalOpen(true);
-    setSelectedPropertyId(propertyId); // Set selected property_id
-};
-
+    setSelectedPropertyId(propertyId);
+    setSelectedRealtorId(realtorId);
+  };
 
   const closeApplyModal = () => {
-      setIsApplyModalOpen(false);
+    setIsApplyModalOpen(false);
   };
-      
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -69,7 +69,7 @@ const PropertyCheckoutPage = () => {
                   <p className="text-lg font-bold mt-2">₱ {new Intl.NumberFormat().format(property.price)}</p>
                 </div>
                 <button
-                  onClick={() => openApplyModal(property.id)}
+                  onClick={() => openApplyModal(property.id, property.realtor_id)} // Ensure realtor_id is passed correctly
                   className="font-semibold mt-4 w-full bg-sky-500 text-white py-2 px-4 rounded-lg hover:bg-sky-700"
                 >
                   Apply
@@ -80,7 +80,7 @@ const PropertyCheckoutPage = () => {
         )}
       </div>
       <Footer />
-      <ApplyModal isOpen={isApplyModalOpen} onClose={closeApplyModal} propertyId={selectedPropertyId} />
+      <ApplyModal isOpen={isApplyModalOpen} onClose={closeApplyModal} propertyId={selectedPropertyId} realtorId={selectedRealtorId} />
     </div>
   );
 };

@@ -5,16 +5,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ref, uploadBytes, getDownloadURL } from "@firebase/storage";
 import { imageDb } from '../../firebase';
 
-const ApplyModal = ({ isOpen, onClose, propertyId }) => {
+const ApplyModal = ({ isOpen, onClose, propertyId, realtorId }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
   });
 
-  const [fileUrl, setFileUrl] = useState(null); // State to hold file URL
-  const [companyIdFile, setCompanyIdFile] = useState(null); // State to hold company ID file
-  const [companyIdFileUrl, setCompanyIdFileUrl] = useState(null); // State to hold company ID file URL
+  const [fileUrl, setFileUrl] = useState(null);
+  const [companyIdFileUrl, setCompanyIdFileUrl] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +31,6 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
     if (e.target.name === 'certificate') {
       setFileUrl(downloadURL);
     } else if (e.target.name === 'companyId') {
-      setCompanyIdFile(file);
       setCompanyIdFileUrl(downloadURL);
     }
   };
@@ -52,25 +50,23 @@ const ApplyModal = ({ isOpen, onClose, propertyId }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          propertyId: propertyId,
+          propertyId,
+          realtorId, // Include realtorId
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
-          fileUrl: fileUrl,
+          fileUrl,
           companyIdUrl: companyIdFileUrl,
         }),
       });
-      
+
       const responseData = await response.json();
-  
+
       if (response.ok) {
-        // If the application was successfully submitted
         toast.success('Application Submitted Successfully.');
       } else if (response.status === 400 && responseData.message === 'You already applied') {
-        // If the user has already applied
         toast.error('You already applied');
       } else {
-        // For other errors
         toast.error('Failed to Submit Application');
       }
     } catch (error) {
