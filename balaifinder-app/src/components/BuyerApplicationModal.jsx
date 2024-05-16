@@ -24,23 +24,33 @@ const ApplyModal = ({ isOpen, onClose, propertyId, realtorId }) => {
           console.error("User data not found in local storage");
           return;
         }
-        const { id } = JSON.parse(userString);
-
-        const response = await axios.get(`${backendurl}/api/users/${id}/profile`);
         
-        // Log the response data to check its structure
-        console.log('User profile data:', response.data);
-
-        // Update this destructuring based on the logged response structure
-        const { firstName, lastName, email } = response.data; // Adjust if needed based on the log
-        setFormData({ firstName, lastName, email });
+        const { id } = JSON.parse(userString);
+        console.log("User ID:", id);
+  
+        const response = await axios.get(`${backendurl}/api/users/${id}/profile`);
+        console.log('API Response:', response);
+  
+        // Verify response structure
+        if (!response.data) {
+          console.error('User data not found in response:', response.data);
+          return;
+        }
+  
+        // Extract user details from response
+        const { first_name, last_name, email } = response.data;
+        console.log('Extracted User Data:', { first_name, last_name, email });
+  
+        // Update formData state
+        setFormData({ first_name: first_name, last_name: last_name, email });
       } catch (error) {
         console.error('Error fetching user profile:', error);
       }
     };
-
+  
     fetchUserProfile();
   }, []);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,8 +89,8 @@ const ApplyModal = ({ isOpen, onClose, propertyId, realtorId }) => {
         body: JSON.stringify({
           propertyId,
           realtorId,
-          firstName: formData.firstName,
-          lastName: formData.lastName,
+          first_name: formData.first_name,
+          last_name: formData.last_name,
           email: formData.email,
           fileUrl,
           companyIdUrl: companyIdFileUrl,
