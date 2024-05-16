@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Import Axios for making API requests
 import { backendurl } from "../../backend-connector";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
     const [userData, setUserData] = useState({
@@ -63,10 +64,10 @@ export default function Profile() {
     };
   
     return (
-      <div className="bg-slate-100">
+      <div className="bg-gray-100">
         <Navbar />
-        <div className="container mx-auto py-8">
-          <form className="bg-white p-2 rounded-xl">
+        <div className="container flex items-center justify-center mx-auto py-8">
+          <form className="bg-white p-4 rounded-lg w-10/12 shadow-xl">
             <h2 className="font-lato text-3xl text-center font-extrabold text-black m-4">User Account</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 m-4">
               <div>
@@ -184,7 +185,7 @@ export default function Profile() {
                 </div>
               </div>
             </div>
-            <div className="m-4 flex justify-end gap-4">
+            <div className="mb-4 flex justify-end gap-4">
               <button
                 className="bg-sky-500 border border-primary text-white text-h4 py-3 px-8 rounded-lg py-2 lg:mt-8 mt-4 hover:bg-sky-700 hover:shadow-black hover:shadow-md"
                 onClick={(e) => {
@@ -194,9 +195,11 @@ export default function Profile() {
               >
                 Update Profile
               </button>
-              <button className=" bg-black border border-primary text-white text-h4 py-3 px-8 rounded-lg py-2 lg:mt-8 mt-4 hover:shadow-black hover:shadow-md">
-              Change Password
-            </button>
+              <Link to="/user-change-password">
+                <button className=" bg-black border border-primary text-white text-h4 py-3 px-8 rounded-lg py-2 lg:mt-8 mt-4 hover:shadow-black hover:shadow-md">
+                  Change Password
+                </button>
+              </Link>
             </div>
           </form>
         </div>
