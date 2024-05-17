@@ -90,7 +90,7 @@ function ResultSection({ onClose }) {
                 <div key={data[currentIndex].id} className="relative bg-white shadow-md shadow-black rounded-xl duration-500 hover:scale-105">
                   {/* Badge */}
                   <div className="absolute top-0 right-0 mt-2 mr-2">
-                    <span className={`inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 ${badgeText === 'High Match' ? 'bg-teal-400' : badgeText === 'Medium Match' ? 'bg-sky-500' : 'bg-red-500'}`}>
+                    <span className={`inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 ${badgeText === 'Perfect Match' ? 'bg-green-500' : badgeText === 'Highly Recommended' ? 'bg-sky-500' : badgeText === 'You Might Also Like' ? 'bg-yellow-500' : 'bg-red-500' }`}>
                       {badgeText}
                     </span>
                   </div>
