@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { SpinLoader } from 'react-spinners';
 import { Link } from 'react-router-dom';
 import { backendurl } from "../../backend-connector";
 import { GrClose, GrNext, GrPrevious } from "react-icons/gr";
@@ -69,9 +68,7 @@ function ResultSection({ onClose }) {
       <ToastContainer />
       <div className='fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50'>
         {loading ? (
-          <div className="flex justify-center items-center">
-            <SpinLoader color={'#fff'} loading={loading} size={100} />
-          </div>
+          <div class="loader border-t-2 rounded-full border-gray-500 bg-gray-300 animate-spin aspect-square w-8 flex justify-center items-center text-yellow-700"></div>
         ):(
           <div className='shadow-xl shadow-black px-8 sm:py-4 md:py-4 sm:px-8 md:px-16 py-4 space-y-8 bg-white relative rounded-xl relative' style={{ maxWidth: '90%', maxHeight: '90vh', overflowY: 'auto' }}>
           <button onClick={onClose} className="px-2 py-2 absolute top-4 right-4 hover:bg-red-500 hover:text-white rounded-full">
