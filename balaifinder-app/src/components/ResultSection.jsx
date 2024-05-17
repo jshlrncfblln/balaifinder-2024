@@ -70,7 +70,7 @@ function ResultSection({ onClose }) {
       <ToastContainer />
       <div className='fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50'>
         {loading ? (
-          <div className="flex justify-center items-center h-screen bg-white flex-col">
+          <div className="flex justify-center items-center h-screen flex-col">
             <div className="cube-loader">
                 <div className="cube-top"></div>
                 <div className="cube-wrapper">

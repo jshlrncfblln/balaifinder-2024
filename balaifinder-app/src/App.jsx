@@ -72,7 +72,7 @@ function App() {
   return (
         <div>
         {loading ? (
-            <div className="flex justify-center items-center h-screen bg-white flex-col">
+            <div className="flex justify-center items-center h-screen flex-col">
                 <div className="cube-loader">
                     <div className="cube-top"></div>
                     <div className="cube-wrapper">
