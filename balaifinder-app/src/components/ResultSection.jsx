@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import { backendurl } from "../../backend-connector";
 import { GrClose, GrNext, GrPrevious } from "react-icons/gr";
-import './CubeLoader.css'
+import '../CubeLoader.css'
 
 
 
