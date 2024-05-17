@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { SpinLoader } from 'react-spinners';
 import { Link } from 'react-router-dom';
 import { backendurl } from "../../backend-connector";
 import { GrClose, GrNext, GrPrevious } from "react-icons/gr";
@@ -16,9 +17,9 @@ function ResultSection({ onClose }) {
     try {
       const response = await axios.get(`${backendurl}/api/get`);
       setData(response.data);
-      setLoading(false);
     } catch (error) {
       console.error("Error loading data:", error);
+    }finally{
       setLoading(false);
     }
   };
@@ -63,7 +64,12 @@ function ResultSection({ onClose }) {
     <div>
       <ToastContainer />
       <div className='fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50'>
-        <div className='shadow-xl shadow-black px-8 sm:py-4 md:py-4 sm:px-8 md:px-16 py-4 space-y-8 bg-white relative rounded-xl relative' style={{ maxWidth: '90%', maxHeight: '90vh', overflowY: 'auto' }}>
+        {loading ? (
+          <div className="flex justify-center items-center">
+            <SpinLoader color={'#fff'} loading={loading} size={100} />
+          </div>
+        ):(
+          <div className='shadow-xl shadow-black px-8 sm:py-4 md:py-4 sm:px-8 md:px-16 py-4 space-y-8 bg-white relative rounded-xl relative' style={{ maxWidth: '90%', maxHeight: '90vh', overflowY: 'auto' }}>
           <button onClick={onClose} className="px-2 py-2 absolute top-4 right-4 hover:bg-red-500 hover:text-white rounded-full">
             <GrClose />
           </button>
@@ -90,7 +96,7 @@ function ResultSection({ onClose }) {
                 <div key={data[currentIndex].id} className="relative bg-white shadow-md shadow-black rounded-xl duration-500 hover:scale-105">
                   {/* Badge */}
                   <div className="absolute top-0 right-0 mt-2 mr-2">
-                    <span className={`inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 ${badgeText === 'Perfect Match' ? 'bg-green-500' : badgeText === 'Highly Recommended' ? 'bg-sky-500' : badgeText === 'You Might Also Like' ? 'bg-yellow-500' : 'bg-red-500' }`}>
+                    <span className={`inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 ${badgeText === 'Perfect Match' ? 'bg-green-500 text-white' : badgeText === 'Highly Recommended' ? 'bg-sky-500 text-white' : badgeText === 'You Might Also Like' ? 'bg-yellow-500 text-white' : 'bg-red-500 text-white' }`}>
                       {badgeText}
                     </span>
                   </div>
@@ -193,7 +199,8 @@ function ResultSection({ onClose }) {
               </div>
             </section>
           )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
