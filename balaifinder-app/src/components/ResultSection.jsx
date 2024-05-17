@@ -21,6 +21,10 @@ function ResultSection({ onClose }) {
       console.error("Error loading data:", error);
     }finally{
       setLoading(false);
+      // Simulate loading time with setTimeout
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000); // Adjust the time in milliseconds (here, 2 seconds)
     }
   };
 
